@@ -1,0 +1,57 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/DBDataModel,
+    authors: ["Peter Van Gemmeren <gemmeren@anl.gov>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/CLIDSvc,
+            Control/DataModel,
+            Control/AthContainers,
+        ],
+        private: [
+            External/AtlasPOOL,
+            External/AtlasReflex,
+            Database/APR/CollectionBase,
+        ],
+        runtime: [
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    DBDataModel: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      [
+            "CLIDSvc",
+            "DataModel",
+            "AthContainers",
+            "POOL",
+            "Reflex",
+            "CollectionBase",
+        ],
+    },
+    
+    DBDataModelDict: {
+        features: "atlas_dictionary",
+        source:   ["DBDataModel/DBDataModelDict.h"],
+        selection_file: "DBDataModel/selection.xml",
+        use:      [
+            "DBDataModel",
+        ],
+    },
+    
+}
+
+## EOF ##

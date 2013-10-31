@@ -1,0 +1,71 @@
+## package header
+package: {
+    name:    Control/Valkyrie,
+    authors: [Sebastien Binet <binet@cern.ch>, Frank Winklmeier <fwinkl@cern>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/AthenaCommon,
+        ],
+        private: [
+            External/GaudiInterface,
+            External/AtlasValgrind,
+            External/AtlasBoost,
+            Control/AthenaKernel,
+            Control/AthenaBaseComps,
+        ],
+        runtime: [
+            Control/AthenaCommon,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    Valkyrie: {
+        features: "atlas_component",
+        source:   ["src/*.cxx", "src/components/*.cxx"],
+        use: [
+            "AthenaCommon",
+            "GaudiKernel",
+            "valgrind",
+            "boost-system", "boost-filesystem",
+            "AthenaKernel",
+            "AthenaBaseComps"],
+    },
+    
+    Valkyrie-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    Valkyrie-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    Valkyrie-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   ["scripts/*"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

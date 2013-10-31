@@ -1,0 +1,32 @@
+## package header
+package: {
+    name:    DetectorDescription/GeoModel/GeoModelInterfaces,
+    authors: [],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/AthenaKernel,
+            Control/CLIDSvc,
+            External/GaudiInterface,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    GeoModelInterfaces: {
+        features: "atlas_install_headers",
+    },
+}
+
+## EOF ##

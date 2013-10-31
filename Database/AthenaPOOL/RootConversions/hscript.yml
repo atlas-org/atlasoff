@@ -1,0 +1,85 @@
+## package header
+package: {
+    name:    "Database/AthenaPOOL/RootConversions",
+    authors: ["scott snyder <snyder@bnl.gov>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasROOT,
+            ],
+        private: [
+            AtlasTest/TestTools,
+            External/AtlasReflex,
+        ],
+        runtime: [
+            
+        ],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+
+    RootConversions: {
+        features: "atlas_library",
+        source:   "src/*.cxx",
+        use:      ["ROOT"],
+    },
+
+    RootConversionsDict: {
+        features: "atlas_dictionary",
+        source:   "RootConversions/RootConversionsDict.h",
+        selection_file: "RootConversions/selection.xml",
+        use:      ["RootConversions"],
+    },
+
+    ## -- tests --
+    TestRootConversions1Dict: {
+        features: "atlas_dictionary",
+        source:   "test/RootConversionsTest1Dict.h",
+        selection_file: "test/selection_test1.xml",
+        use:      ["RootConversions"],
+        do_merge_rootmap: False,
+    },
+
+    TestRootConversions2Dict: {
+        features: "atlas_dictionary",
+        source:   "test/RootConversionsTest2Dict.h",
+        selection_file: "test/selection_test2.xml",
+        use:      ["RootConversions"],
+    },
+
+    RootConversions-twrite: {
+        features: "atlas_unittest",
+        source:   "test/twrite_test.cxx",
+        use:      ["RootConversions", "genreflex-TestRootConversions1Dict",
+                   "Cintex",
+                   ],
+    },
+    
+    RootConversions-tread_noconv: {
+        features: "atlas_unittest",
+        source:   "test/tread_noconv_test.cxx",
+        use:      ["RootConversions", "genreflex-TestRootConversions1Dict",
+                   "Cintex",
+                   ],
+    },
+    
+    RootConversions-tread: {
+        features: "atlas_unittest",
+        source:   "test/tread_test.cxx",
+        use:      ["RootConversions", "genreflex-TestRootConversions2Dict",
+                   "Cintex",
+                   ],
+    },
+    
+}
+
+## EOF ##

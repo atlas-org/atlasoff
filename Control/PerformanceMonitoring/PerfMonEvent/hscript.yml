@@ -1,0 +1,52 @@
+## package header
+package: {
+    name:    Control/PerformanceMonitoring/PerfMonEvent,
+    authors: ["Sebastien Binet <binet@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            External/AtlasPython,
+        ],
+        private: [
+            External/AtlasReflex,            
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    PerfMonEvent: {
+        features: "atlas_library",
+        source:   [
+            "src/PyStore.cxx",
+            "src/PyChrono.cxx",
+            "src/DataModel.cxx",
+            "src/MemStatsHooks.cxx",
+            "src/MallocStats.cxx",
+            ],
+        use:      ["GaudiKernel",
+                   "python",
+                   "rt", "pthread",
+                   ],
+    },
+
+    PerfMonEventDict: {
+        features: "atlas_dictionary",
+        source:   "PerfMonEvent/PerfMonEventDict.h",
+        selection_file: "PerfMonEvent/selection.xml",
+        use:      ["PerfMonEvent"],
+    },
+
+}
+
+## EOF ##

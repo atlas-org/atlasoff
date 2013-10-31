@@ -1,0 +1,40 @@
+## package header
+package: {
+    name:    Tools/PmbCxxUtils,
+    authors: [Thomas Kittelmann <thomas.kittelmann@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    PmbCxxUtils: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

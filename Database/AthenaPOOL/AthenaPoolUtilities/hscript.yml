@@ -1,0 +1,65 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/AthenaPoolUtilities,
+    authors: [
+        "RD Schaffer <R.D.Schaffer@cern.ch>",
+        "Christian Arnault <arnault@lal.in2p3.fr>",
+        "Kyle Cranmer <cranmer@cern.ch>",
+        "Kristo Karr <Kristo.Karr@cern.ch>",
+        ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasCORAL,
+            Control/AthenaKernel,
+            Control/SGTools,
+            Control/DataModel,
+            Database/AthenaPOOL/DBDataModel,
+        ],
+        private: [
+            External/AtlasReflex,
+            TestPolicy,
+        ],
+        runtime: [
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+}
+
+configure: {
+    apply-tags: [
+        NEEDS_CORAL_BASE,
+    ],
+
+    hwaf-call: [
+        "waftools/poolcnv-features.py",
+    ],
+}
+
+build: {
+
+    AthenaPoolUtilities: {
+        features: "atlas_install_headers",
+    },
+    
+    AthenaPoolUtilitiesDict: {
+        features: "atlas_dictionary",
+        source:   "AthenaPoolUtilities/AthenaPoolUtilitiesDict.h",
+        selection_file: "AthenaPoolUtilities/selection.xml",
+        use: [
+            "AthenaPoolUtilities",
+            "AthenaKernel",
+            "SGTools",
+            "DataModel",
+            "DBDataModel",
+        ],
+    },
+
+}
+
+## EOF ##

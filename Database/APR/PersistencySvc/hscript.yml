@@ -1,0 +1,69 @@
+## package header
+package: {
+    name:    Database/APR/PersistencySvc,
+    authors: ["Marcin Nowak"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasReflex,
+            Database/APR/POOLCore,
+            Database/APR/StorageSvc,
+        ],
+        private: [
+            Database/APR/FileCatalog,
+            External/AtlasCORAL,
+            Control/AthenaKernel,
+            Database/PersistentDataModel,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    PersistencySvc: {
+        features: "atlas_library",
+        source:   ["src/*.cpp"],
+        use:      [
+            "Reflex",
+            "POOLCore",
+            "StorageSvc",
+            "FileCatalog",
+        ],
+    },
+
+    # -- utilities --
+    pool_extractFileIdentifier: {
+        features: "atlas_application",
+        source:   "utilities/pool_extractFileIdentifier.cpp",
+        use:      [
+            "PersistencySvc",
+            "FileCatalog",
+            "CORAL",
+            "AthenaKernel",
+        ],
+    },
+    
+    pool_insertFileToCatalog: {
+        features: "atlas_application",
+        source:   "utilities/pool_extractFileIdentifier.cpp",
+        use:      [
+            "PersistencySvc",
+            "FileCatalog",
+            "CORAL",
+            "AthenaKernel",
+        ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

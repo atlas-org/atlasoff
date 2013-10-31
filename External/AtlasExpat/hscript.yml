@@ -1,0 +1,26 @@
+## package header
+package: {
+    name:    External/AtlasExpat,
+    authors: [],
+
+
+    deps: {
+        public: [
+            External/ExternalPolicy,
+            LCG_Interfaces/Expat,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+}
+
+## EOF ##

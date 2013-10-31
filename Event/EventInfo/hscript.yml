@@ -1,0 +1,98 @@
+## package header
+package: {
+    name:    Event/EventInfo,
+    authors: [
+        "P Calafiura <pcalafiura@lbl.gov>",
+        "RD Schaffer <R.D.Schaffer@cern.ch>",
+        ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/SGTools,
+            External/GaudiInterface,
+        ],
+        private: [
+            Control/DataModel,
+            External/AtlasReflex,
+            AtlasTest/TestTools,
+        ],
+        runtime: [
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    EventInfo: {
+        features: "atlas_library",
+        source:   [
+            "src/EventID.cxx",
+            "src/EventType.cxx",
+            "src/EventInfo.cxx",
+            "src/EventStreamInfo.cxx",
+            "src/PileUpEventInfo.cxx",
+            "src/PileUpTimeEventIndex.cxx",
+            "src/EventIncident.cxx",
+            "src/TriggerInfo.cxx",
+            "src/MergedEventInfo.cxx",
+            "src/TagInfo.cxx",
+            ],
+        use: [
+            "SGTools",
+            "GaudiKernel",
+            "DataModel",
+        ],
+    },
+
+    EventInfoDict: {
+        features: "atlas_dictionary",
+        source:   "EventInfo/EventInfoDict.h",
+        selection_file: "EventInfo/selection.xml",
+        use:      "EventInfo",
+        dict_dataLinks: "EventInfo",
+    },
+    
+    EventInfo-install-jobos: {
+        features: "atlas_install_joboptions",
+    },
+    
+    EventInfo-install-py: {
+        features: "atlas_install_python_modules",
+    },
+    
+    EventInfo-test-PileUpEventInfo: {
+        features: "atlas_unittest",
+        source:   "test/PileUpEventInfo_test.cxx",
+        use:      ["EventInfo"],
+    },
+    
+    EventInfo-test-MergedEventInfo: {
+        features: "atlas_unittest",
+        source:   "test/MergedEventInfo_test.cxx",
+        use:      ["EventInfo"],
+    },
+    
+    # FIXME
+    # EventInfo-test-AtlasMcWeight: {
+    #     features: "atlas_unittest",
+    #     source:   "test/AtlasMcWeight_test.cxx",
+    #     use:      ["EventInfo"],
+    # }
+
+    # testEventInfo: {
+    #     features: "atlas_application",
+    #     source:   "src/testEventInfo.cxx",
+    #     use:      ["EventInfo", "TestTools"],
+    # },
+}
+
+## EOF ##

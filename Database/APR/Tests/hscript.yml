@@ -1,0 +1,146 @@
+## package header
+package: {
+    name:    Database/APR/Tests,
+    authors: ["Marcin Nowak",
+              ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [
+            AtlasTest/TestTools,
+            External/AtlasReflex,
+            External/AtlasCppUnit,
+            Database/PersistentDataModel,
+            Database/APR/FileCatalog,
+            Database/APR/PersistencySvc,
+            Database/APR/StorageSvc,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+
+    test_TestDictionaryDict: {
+        features: "atlas_dictionary",
+        source:   "TestDictionary/dict_all.h",
+        selection_file: "TestDictionary/classes.xml",
+        includes: ["TestDictionary", "."],
+        do_merge_rootmap: False,
+    },
+
+    ## -- storagesvc tests --
+    APR-Tests-StorageSvc_BasicFunctionality: {
+        features: "atlas_unittest atlas_dictionary",
+        source:   ["StorageSvc_BasicFunctionality/*.cpp",
+                   "TestDictionary/dict_all.h"],
+        selection_file: "TestDictionary/classes.xml",
+        includes: ["TestDictionary", "StorageSvc_BasicFunctionality", "."],
+        do_merge_rootmap: False,
+        use:      ["StorageSvc"],
+    },
+    
+    APR-Tests-StorageSvc_MultipleIterators: {
+        features: "atlas_unittest atlas_dictionary",
+        source:   ["StorageSvc_MultipleIterators/*.cpp",
+                   "TestDictionary/dict_all.h"],
+        selection_file: "TestDictionary/classes.xml",
+        includes: ["TestDictionary", "StorageSvc_MultipleIterators", "."],
+        do_merge_rootmap: False,
+        use:      ["StorageSvc"],
+    },
+    
+    APR-Tests-StorageSvc_ParallelReadWrite: {
+        features: "atlas_unittest atlas_dictionary",
+        source:   ["StorageSvc_ParallelReadWrite/*.cpp",
+                   "TestDictionary/dict_all.h"],
+        selection_file: "TestDictionary/classes.xml",
+        includes: ["TestDictionary", "StorageSvc_ParallelReadWrite", "."],
+        do_merge_rootmap: False,
+        use:      ["StorageSvc"],
+    },
+    
+    APR-Tests-StorageSvc_TransientMembers: {
+        features: "atlas_unittest atlas_dictionary",
+        source:   ["StorageSvc_TransientMembers/*.cpp",
+                   "StorageSvc_TransientMembers/TestClassWithTransients.h"],
+        selection_file: "StorageSvc_TransientMembers/classes.xml",
+        includes: ["TestDictionary", "StorageSvc_TransientMembers", "."],
+        do_merge_rootmap: False,
+        use:      ["StorageSvc"],
+    },
+
+    # The FileCatalog functional tests
+    APR-Tests-FileCatalog_Functionality: {
+        features: "atlas_unittest atlas_dictionary",
+        source:   ["FileCatalog_Functionality/*.cpp",
+                   "TestDictionary/dict_all.h"],
+        selection_file: "TestDictionary/classes.xml",
+        includes: ["TestDictionary", "FileCatalog_Functionality", "."],
+        do_merge_rootmap: False,
+        use:      ["FileCatalog", "CppUnit"],
+    },
+    
+    # The PersistencySvc functional tests
+    APR-Tests-PersistencySvc_Functionality: {
+        features: "atlas_unittest atlas_dictionary",
+        source:   ["PersistencySvc_Functionality/*.cpp",
+                   "TestDictionary/dict_all.h"],
+        selection_file: "TestDictionary/classes.xml",
+        includes: ["TestDictionary", "PersistencySvc_Functionality", "."],
+        do_merge_rootmap: False,
+        use:      ["PersistencySvc"],
+    },
+    
+    APR-Tests-PersistencySvc_FileCatalogOperations: {
+        features: "atlas_unittest atlas_dictionary",
+        source:   ["PersistencySvc_FileCatalogOperations/*.cpp",
+                   "TestDictionary/dict_all.h"],
+        selection_file: "TestDictionary/classes.xml",
+        includes: ["TestDictionary", "PersistencySvc_FileCatalogOperations", "."],
+        do_merge_rootmap: False,
+        use:      ["PersistencySvc"],
+    },
+    
+    APR-Tests-PersistencySvc_FileOpenWithoutCatalog: {
+        features: "atlas_unittest atlas_dictionary",
+        source:   ["PersistencySvc_FileOpenWithoutCatalog/*.cpp",
+                   "TestDictionary/dict_all.h"],
+        selection_file: "TestDictionary/classes.xml",
+        includes: ["TestDictionary", "PersistencySvc_FileOpenWithoutCatalog", "."],
+        do_merge_rootmap: False,
+        use:      ["PersistencySvc"],
+    },
+    
+    APR-Tests-PersistencySvc_Parameters: {
+        features: "atlas_unittest atlas_dictionary",
+        source:   ["PersistencySvc_Parameters/*.cpp",
+                   "TestDictionary/dict_all.h"],
+        selection_file: "TestDictionary/classes.xml",
+        includes: ["TestDictionary", "PersistencySvc_Parameters", "."],
+        do_merge_rootmap: False,
+        use:      ["PersistencySvc"],
+    },
+    
+    APR-Tests-PersistencySvc_NoClassID: {
+        features: "atlas_unittest atlas_dictionary",
+        source:   ["PersistencySvc_NoClassID/*.cpp",
+                   "PersistencySvc_NoClassID/MyTestClass.h"],
+        selection_file: "PersistencySvc_NoClassID/classes.xml",
+        includes: ["TestDictionary", "PersistencySvc_NoClassID", "."],
+        do_merge_rootmap: False,
+        use:      ["PersistencySvc"],
+    },
+    
+}
+
+## EOF ##

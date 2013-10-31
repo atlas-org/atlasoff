@@ -1,0 +1,62 @@
+## package header
+package: {
+    name:    DetectorDescription/IdDictDetDescrCnv,
+    authors: ["RD Schaffer, <R.D.Schaffer@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [
+            DetectorDescription/Identifier,
+            DetectorDescription/DetDescrCnvSvc,
+            DetectorDescription/IdDictParser,
+            DetectorDescription/IdDictDetDescr,
+            DetectorDescription/AtlasDetDescr,
+            DetectorDescription/GeoModel/GeoModelInterfaces,
+            DetectorDescription/GeoModel/GeoModelUtilities,
+            Database/AthenaPOOL/RDBAccessSvc,
+            Control/StoreGate,
+            Control/SGTools,
+            External/GaudiInterface,
+            External/AtlasCORAL,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    IdDictDetDescrCnv: {
+        features: "atlas_component",
+        source:   ["src/*.cxx"],
+        use:      [
+            "Identifier",
+            "DetDescrCnvSvc",
+            "IdDictParser",
+            "IdDictDetDescr",
+            "AtlasDetDescr",
+            "GeoModelInterfaces",
+            "GeoModelUtilities",
+            "RDBAccessSvc",
+            "StoreGate",
+            "SGTools",
+            "GaudiKernel",
+            "CORAL",
+        ],
+    },
+
+    IdDictDetDescrCnv-install-jobos: {
+        features: "atlas_install_joboptions",
+    },
+
+}
+
+## EOF ##

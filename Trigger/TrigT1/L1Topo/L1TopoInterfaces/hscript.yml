@@ -1,0 +1,38 @@
+## package header
+package: {
+    name:    Trigger/TrigT1/L1Topo/L1TopoInterfaces,
+    authors: [],
+
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            LCG_Interfaces/Boost,
+            Trigger/TrigT1/L1Topo/L1TopoCommon,
+            Trigger/TrigT1/L1Topo/L1TopoEvent,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    L1TopoInterfaces: {
+        features: "atlas_library",
+        source:   ["Root/*.cxx"],
+        use: ["Boost", "L1TopoCommon", "L1TopoEvent"],
+        cxxflags: ["-std=c++0x"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

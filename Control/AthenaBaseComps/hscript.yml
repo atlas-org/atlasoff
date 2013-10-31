@@ -1,0 +1,47 @@
+## package header
+package: {
+    name:    Control/AthenaBaseComps,
+    authors: ["Sebastien Binet <binet@cern.ch>",
+              ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            External/AtlasROOT,
+            Control/AthenaKernel,
+            Control/StoreGate,
+            Control/SGTools,
+            Control/CxxUtils,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    AthenaBaseComps: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      [
+            "GaudiKernel",
+            "AthenaKernel",
+            "StoreGate",
+            "SGTools",
+            "CxxUtils",
+            "ROOT",
+        ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

@@ -1,0 +1,56 @@
+## package header
+package: {
+    name:    Control/PyKernel,
+    authors: [Tadashi Maeno <Tadashi.Maeno@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasPython,
+        ],
+        private: [
+            External/AtlasReflex,
+        ],
+        runtime: [
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    PyKernel-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    PyKernel-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    PyKernel: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: ["python"],
+    },
+    
+    PyKernelDict: {
+        features: "atlas_dictionary",
+        source:   ["PyKernel/PyKernelDict.h"],
+        use:      ["PyKernel"],
+        selection_file: ["PyKernel/selection.xml"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

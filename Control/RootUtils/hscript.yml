@@ -1,0 +1,80 @@
+## package header
+package: {
+    name:    Control/RootUtils,
+    authors: ["Scott Snyder <snyder@fnal.gov>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasROOT,
+            External/AtlasBoost,
+            External/AtlasPython,
+        ],
+        private: [
+            External/AtlasReflex,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    RootUtils: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      [
+            "ROOT",
+            "boost-system", "boost-filesystem",
+        ],
+    },
+
+    RootUtilsDict: {
+        features: "atlas_dictionary",
+        source:   ["RootUtils/RootUtilsDict.h"],
+        selection_file: "RootUtils/selection.xml",
+        use:      [
+            "RootUtils",
+            "Reflex",
+        ],
+    },
+    
+    RootUtilsPyROOT: {
+        features: "atlas_library",
+        source:   ["pyroot/*.cxx"],
+        use:      [
+            "ROOT",
+            "ROOT-TreePlayer",
+            "ROOT-PyROOT",
+            "python",
+        ],
+    },
+    
+    RootUtilsPyROOTDict: {
+        features: "atlas_dictionary",
+        source:   ["RootUtils/RootUtilsPyROOTDict.h"],
+        selection_file: "RootUtils/selection_PyROOT.xml",
+        use:      [
+            "RootUtilsPyROOT",
+            "Reflex",
+        ],
+    },
+
+    hwaf-call: [],
+}
+
+## EOF ##

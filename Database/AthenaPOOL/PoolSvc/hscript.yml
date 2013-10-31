@@ -1,0 +1,59 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/PoolSvc,
+    authors: ["atlas collaboration"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasPOOL,
+            External/GaudiInterface,
+            Database/APR/CollectionBase,
+        ],
+        private: [
+            External/AtlasCORAL,
+            Control/AthenaBaseComps,
+            Control/AthenaKernel,
+            Database/PersistentDataModel,
+            Database/ConnectionManagement/DBReplicaSvc,
+            Tools/PathResolver,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    PoolSvc: {
+        features: "atlas_component",
+        source:   ["src/*.cxx", "src/components/*.cxx"],
+        use: [
+            "GaudiKernel",
+            "POOL",
+            "CORAL",
+            "AthenaBaseComps",
+            "AthenaKernel",
+            "PersistentDataModel",
+            "DBReplicaSvc",
+            "PathResolver",
+            "CollectionBase",
+        ],
+    },
+
+    PoolSvc-install-headers: {
+        features: "atlas_install_headers",
+    },
+    
+    PoolSvc-install-jobos: {
+        features: "atlas_install_joboptions",
+    },
+}
+
+## EOF ##

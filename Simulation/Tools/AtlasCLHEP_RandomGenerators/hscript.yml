@@ -1,0 +1,60 @@
+## package header
+package: {
+    name:    Simulation/Tools/AtlasCLHEP_RandomGenerators,
+    authors: ["M. Duehrssen <michael.duehrssen@cern.ch>"],
+
+
+    deps: {
+        public: [
+            External/AtlasCLHEP,
+            AtlasPolicy,
+        ],
+        private: [
+            External/GaudiInterface,
+            Control/AthenaKernel,
+            External/AtlasDSFMT,
+            Control/AthenaBaseComps,
+            External/AtlasROOT,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    AtlasCLHEP_RandomGenerators: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      [
+            "GaudiKernel",
+            "AthenaKernel",
+            "AthenaBaseComps",
+            "AtlasDSFMT",
+            "CLHEP",
+            "ROOT",
+        ],
+    },
+
+    # uncomment to run the rnd generator testing code with the JO in share
+    # AtlasCLHEP_RandomGenerators: {
+    #     features: "atlas_dualuselib",
+    #     source:   ["src/*.cxx", "src/ValidationTests/*.cxx"],
+    #     use:      [
+    #         "GaudiKernel",
+    #         "AthenaKernel",
+    #         "AthenaBaseComps",
+    #         "AtlasDSFMT",
+    #         "CLHEP",
+    #         "ROOT",
+    #     ],
+    # },
+}
+
+## EOF ##

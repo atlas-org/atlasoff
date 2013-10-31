@@ -1,0 +1,136 @@
+## package header
+package: {
+    name:    Database/APR/CollectionUtilities,
+    authors: ["Marcin Nowak"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasCORAL,
+            Database/PersistentDataModel,
+            Database/APR/CollectionBase,
+            Database/APR/TrigCollQuery,
+        ],
+        private: [
+            External/AtlasXercesC,
+            External/AtlasBoost,
+            Database/APR/POOLCore,
+            Database/APR/PersistencySvc,
+            Database/APR/FileCatalog,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+
+    CollectionUtilities: {
+        features: "atlas_library",
+        source: [
+            src/ArgQual.cpp,
+            src/CmdLineArgs2.cpp,
+            src/Args2Container.cpp,
+            src/CollectionMetadataParser.cpp,
+            src/CatalogInfo.cpp,
+            src/CollectionPool.cpp,
+            src/CollSplitByGUIDBase.cpp,
+            src/Progress.cpp,
+            src/CollAppendBase.cpp,
+            src/UtilityFuncs.cpp,
+            src/MaxEventsInfo.cpp,
+            src/QueryInfo.cpp,
+            src/MetaInfo.cpp,
+            src/GenericMetaHandler.cpp,
+            src/CollMetaRegistry.cpp,
+            ],
+        use: [
+            "CORAL",
+            "PersistencyDataModel",
+            "CollectionBase",
+            "TrigCollQuery",
+
+            "POOLCore",
+            "boost-system", "boost-filesystem",
+            "XercesC",
+            "FileCatalog",
+            ],
+    },
+
+    CollectionUtilities-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   ["scripts/*.exe", "scripts/*.py"],
+    },
+
+    ## -- utilities --
+
+    coll_insertGuidToCatalog: {
+        features: "atlas_application",
+        source:   "utilities/coll_insertGuidToCatalog.cpp",
+        use:      ["CollectionUtilities"],
+    },
+    
+    CollAppend: {
+        features: "atlas_application",
+        source:   "utilities/CollAppend.cpp",
+        use:      ["CollectionUtilities"],
+    },
+    
+    CollListAttrib: {
+        features: "atlas_application",
+        source:   "utilities/CollListAttrib.cpp",
+        use:      ["CollectionUtilities"],
+    },
+    
+    CollListFileGUID: {
+        features: "atlas_application",
+        source:   "utilities/CollListFileGUID.cpp",
+        use:      ["CollectionUtilities"],
+    },
+    
+    CollListMetadata: {
+        features: "atlas_application",
+        source:   "utilities/CollListMetadata.cpp",
+        use:      ["CollectionUtilities"],
+    },
+    
+    CollListPFN: {
+        features: "atlas_application",
+        source:   "utilities/CollListPFN.cpp",
+        use:      ["CollectionUtilities"],
+    },
+    
+    CollListToken: {
+        features: "atlas_application",
+        source:   "utilities/CollListToken.cpp",
+        use:      ["CollectionUtilities"],
+    },
+    
+    CollQuery: {
+        features: "atlas_application",
+        source:   "utilities/CollQuery.cpp",
+        use:      ["CollectionUtilities"],
+    },
+    
+    CollRemove: {
+        features: "atlas_application",
+        source:   "utilities/CollRemove.cpp",
+        use:      ["CollectionUtilities"],
+    },
+    
+    CollSplitByGUID: {
+        features: "atlas_application",
+        source:   "utilities/CollSplitByGUID.cpp",
+        use:      ["CollectionUtilities"],
+    },
+    
+    
+}
+
+## EOF ##

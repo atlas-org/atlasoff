@@ -1,0 +1,57 @@
+## package header
+package: {
+    name:    Database/AtlasSealCLHEP,
+    authors: [RD Schaffer <R.D.Schaffer@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasCLHEP,
+            Database/AthenaPOOL/AthenaPoolServices,
+        ],
+        private: [
+            External/AtlasReflex,
+        ],
+        runtime: [
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    AtlasSealCLHEP: {
+        features: "atlas_library",
+        source:   ["src/OldCLHEPStreamers.cxx"],
+        use: ["CLHEP", "AthenaPoolServices", "Reflex"],
+    },
+    
+    AtlasSealCLHEPDict: {
+        features: "atlas_dictionary",
+        source:   ["AtlasSealCLHEP/AtlasSealCLHEPDict.h"],
+        use: ["AtlasSealCLHEP"],
+        selection_file: ["AtlasSealCLHEP/selection.xml"],
+    },
+    
+    AtlasSealCLHEP-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    AtlasSealCLHEP-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

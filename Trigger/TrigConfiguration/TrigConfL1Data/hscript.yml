@@ -1,0 +1,48 @@
+## package header
+package: {
+    name:    Trigger/TrigConfiguration/TrigConfL1Data,
+    authors: [David.Berge@cern.ch,Joerg.Stelzer@cern.ch],
+    managers: [Joerg.Stelzer@cern.ch],
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            LCG_Interfaces/Boost,
+        ],
+        private: [
+            Trigger/TrigConfiguration/TrigConfBase,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    TrigConfL1Data: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: ["boost-system", "boost-filesystem", "TrigConfBase"],
+    },
+    
+    TrigConfL1Data-install-headers: {
+        features: "detcommon_install_headers",
+    },
+
+    # TrigConfL1DataDict: {
+    #     features: "atlas_dictionary",
+    #     source:   "TrigConfL1Data/TrigConfL1DataDict.h",
+    #     selection_file: "TrigConfL1Data/selection.xml",
+    #     use:      ["TrigConfL1Data"],
+    # },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

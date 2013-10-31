@@ -1,0 +1,56 @@
+## package header
+package: {
+    name:    Event/ByteStreamData,
+    authors: [Hong Ma <hma@bnl.gov>, Peter van Gemmeren <gemmeren@anl.gov>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/CLIDSvc,
+            Control/SGTools,
+            Control/DataModel,
+            External/DataCollection,
+        ],
+        private: [
+            External/AtlasReflex,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    ByteStreamData: {
+        features: "atlas_library",
+        source:   ["src/ROBData.cxx", "src/ByteStreamMetadata.cxx"],
+        use: [
+            "CLIDSvc", "DataModel", "DataCollection", "SGTools",
+            "AthContainers",
+            ],
+    },
+    
+    ByteStreamData_test: {
+        features: "atlas_library",
+        source:   ["src/ROBData_t.cxx"],
+        use: ["ByteStreamData"],
+    },
+    
+    ByteStreamDataDict: {
+        features: "atlas_dictionary",
+        source:   ["ByteStreamData/ByteStreamDataDict.h"],
+        use:      ["ByteStreamData"],
+        selection_file: ["ByteStreamData/selection.xml"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

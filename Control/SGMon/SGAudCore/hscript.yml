@@ -1,0 +1,37 @@
+## package header
+package: {
+    name:    Control/SGMon/SGAudCore,
+    authors: ["Ilija Vukotic <ivukotic@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            Control/AthenaKernel,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    SGAudCore: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      [GaudiKernel,
+                   AthenaKernel,
+                   ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

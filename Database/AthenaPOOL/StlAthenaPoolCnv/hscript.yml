@@ -1,0 +1,46 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/StlAthenaPoolCnv,
+    authors: [Sebastien Binet <binet@cern.ch>, RD Schaffer <R.D.Schaffer@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasReflex,
+            Database/AthenaPOOL/AthenaPoolUtilities,
+            Database/AthenaPOOL/AthenaPoolCnvSvc,
+            Control/SGTools,
+            External/GaudiInterface,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    StlAthenaPoolCnv: {
+        features: "atlas_component",
+        source:   ["src/*.cxx"],
+        use: ["Reflex", "AthenaPoolUtilities", "AthenaPoolCnvSvc", "SGTools", "GaudiKernel"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

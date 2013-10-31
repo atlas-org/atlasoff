@@ -1,0 +1,42 @@
+## package header
+package: {
+    name:    Control/CLIDSvc,
+    authors: [
+        "Paolo Calafiura <Paolo.Calafiura@cern.ch>",
+        "Craig Tull <cetull@lbl.gov>",
+        ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/AthenaKernel,
+            Control/SGTools,
+            External/AtlasBoost,
+            External/GaudiInterface,
+            External/AtlasPython,
+        ],
+        private: [
+            AtlasTest/TestTools,
+        ],
+        runtime: [
+            External/AtlasPython,
+        ],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+
+    CLIDSvc: {
+        features: "atlas_install_headers",
+    },
+    
+}
+
+## EOF ##

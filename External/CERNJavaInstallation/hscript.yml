@@ -1,0 +1,35 @@
+## package header
+package: {
+    name:    External/CERNJavaInstallation,
+    authors: ["Julius Hrivnac <Julius.Hrivnac@cern.ch>"],
+
+
+    deps: {
+        public: [
+            External/ExternalPolicy,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+        JAVA_SUBDIR: "sw/lcg/external/Java",
+        JAVA_BASE:   "${SITEROOT}/${JAVA_SUBDIR}",
+    },
+    alias: {
+
+    },
+}
+
+build: {
+
+}
+
+## EOF ##

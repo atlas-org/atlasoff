@@ -1,0 +1,44 @@
+## package header
+package: {
+    name:    Tools/PmbUtils,
+    authors: [ATLAS Collaboration],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Tools/CoolDozer,
+            Tools/PyUtils,
+            External/AtlasMatplotlib,
+        ],
+        private: [],
+        runtime: [
+            Tools/CoolDozer,
+            Tools/PyUtils,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    PmbUtils-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    PmbUtils-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   ["scripts/*"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

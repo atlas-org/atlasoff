@@ -1,0 +1,38 @@
+## package header
+package: {
+    name:    Trigger/TrigConfiguration/TrigConfHLTData,
+    authors: [David.Berge@cern.ch, Joerg.Stelzer@cern.ch],
+    managers: [Joerg.Stelzer@cern.ch],
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            LCG_Interfaces/Boost,
+            Trigger/TrigConfiguration/TrigConfL1Data,
+            Trigger/TrigConfiguration/TrigConfBase,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    TrigConfHLTData: {
+        features: "detcommon_library",
+        source:   "src/*.cxx",
+        use: [
+            "boost-system",
+            "TrigConfL1Data",
+            "TrigConfBase",
+        ],
+    },
+}
+
+## EOF ##

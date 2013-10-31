@@ -1,0 +1,36 @@
+## package header
+package: {
+    name:    Control/DataModel,
+    authors: ["Paolo Calafiura <Paolo.Calafiura@cern.ch>",
+              "Hong Ma <hma@bnl.gov>",
+              "Srini Rajagopalan <srinir@bnl.gov>",
+              ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/SGTools,
+            Control/AthAllocators,
+            Control/AthLinks,
+            Control/AthContainers,
+            Control/CxxUtils,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    DataModel: {
+        features: "atlas_install_headers",
+    },
+}
+
+## EOF ##

@@ -1,0 +1,82 @@
+## package header
+package: {
+    name:    Control/AthenaExamples/AthExJobOptions,
+    authors: [Wim Lavrijsen <WLavrijsen@lbl.gov>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            Control/AthenaKernel,
+            Control/AthenaBaseComps,
+            Control/CLIDSvc,
+        ],
+        private: [
+            Event/EventInfo,
+            Control/StoreGate,
+            AtlasTest/TestTools,
+        ],
+        runtime: [
+            AtlasTest/TestTools,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    AthExJobOptions: {
+        features: "atlas_component",
+        source:   ["src/*.cxx",
+                   "src/components/*.cxx"],
+        use: ["GaudiKernel",
+              "AthenaKernel",
+              "AthenaBaseComps",
+              "CLIDSvc",
+              "EventInfo",
+              "StoreGate",
+              ],
+    },
+    
+    AthExJobOptions-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    AthExJobOptions-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    AthExJobOptions-runtest-JobOptionsBasic: {
+        features: "atlas_athenarun_test",
+        use: ["AthExJobOptions"],
+        joboptions: ["AthExJobOptions/AthExJobOptions_BasicJobOptions.py"],
+        post_script: ["${TESTTOOLSROOT}/share/post.sh JobOptionsBasic"],
+    },
+    
+    AthExJobOptions-runtest-JobOptionsCustomTool: {
+        features: "atlas_athenarun_test",
+        use: ["AthExJobOptions"],
+        joboptions: ["AthExJobOptions/AthExJobOptions_CustomToolJobOptions.py"],
+        post_script: ["${TESTTOOLSROOT}/share/post.sh JobOptionsCustomTool"],
+    },
+    
+    AthExJobOptions-runtest-JobOptionsCustomTopAlg: {
+        features: "atlas_athenarun_test",
+        use: ["AthExJobOptions"],
+        joboptions: ["AthExJobOptions/AthExJobOptions_CustomTopAlgorithmJobOptions.py"],
+        post_script: ["${TESTTOOLSROOT}/share/post.sh JobOptionsCustomTopAlg"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

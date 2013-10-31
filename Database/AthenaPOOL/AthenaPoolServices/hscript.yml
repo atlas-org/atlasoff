@@ -1,0 +1,61 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/AthenaPoolServices,
+    authors: [Marcin Nowak <Marcin.Nowak@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+        ],
+        private: [
+            External/AtlasPOOL,
+            Control/RootUtils,
+            External/AtlasReflex,
+            External/AtlasROOT,
+            Database/APR/StorageSvc,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    AthenaPoolServices-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    AthenaRootStreamerSvc: {
+        features: "atlas_component",
+        source:   [
+            "src/AthenaRootConverterHandle.cxx",
+            "src/AthenaRootStreamer.cxx",
+            "src/AthenaRootStreamerSvc.cxx",
+            "src/components/*.cxx",
+        ],
+        use: [
+            "GaudiKernel",
+            "POOL",
+            "StorageSvc",
+            "RootUtils",
+            "Reflex",
+            "ROOT",
+        ],
+    },
+
+    AthenaPoolServices: {
+        features: "atlas_install_headers",
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

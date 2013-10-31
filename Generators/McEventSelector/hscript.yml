@@ -1,0 +1,54 @@
+## package header
+package: {
+    name:    Generators/McEventSelector,
+    authors: [
+        "Marjorie Shapiro <MDShapiro@lbl.gov>",
+        "Paolo Calafiura <Paolo.Calafiura@cern.ch>",
+        "Ian Hinchliffe, <I_Hinchliffe@lbl.gov>",
+        ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/AthenaKernel,
+            External/GaudiInterface,
+        ],
+        private: [
+            Event/EventInfo,
+            Control/SGTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    McEventSelector: {
+        features: "atlas_component",
+        source:   [
+            "src/McAddress.cxx",
+            "src/McEventSelector.cxx",
+            "src/McEventCnv.cxx",
+            "src/McCnvSvc.cxx",
+            "src/McEventSelector_entries.cxx",
+            "src/McEventSelector_load.cxx",
+            ],
+        use: [
+            GaudiKernel,
+            AthenaKernel,
+            EventInfo,
+            SGTools,
+        ],
+    },
+
+}
+
+## EOF ##

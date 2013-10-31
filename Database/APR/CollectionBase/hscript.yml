@@ -1,0 +1,60 @@
+## package header
+package: {
+    name:    Database/APR/CollectionBase,
+    authors: ["Marcin Nowak"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasCORAL,
+            Database/APR/FileCatalog,
+        ],
+        private: [
+            External/AtlasReflex,
+            Database/PersistentDataModel,
+            Database/APR/POOLCore,
+            Database/APR/PersistencySvc,
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    CollectionBase: {
+        features: "atlas_library",
+        source:   ["src/*.cpp"],
+        use:      [
+            "CORAL",
+            "FileCatalog",
+            "POOLCore",
+            "PersistentDataModel",
+            "PersistencySvc",
+            ],
+    },
+
+    CollectionDict: {
+        features: "atlas_dictionary",
+        source:   "CollectionBase/CollectionDict.h",
+        selection_file: "CollectionBase/selection.xml",
+        use:      ["CollectionBase"],
+    },
+
+    CollectionBase-Factory-test: {
+        features: "atlas_unittest",
+        source:   "test/Factory_test.cxx",
+        use:      ["CollectionBase"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

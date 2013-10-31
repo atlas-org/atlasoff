@@ -1,0 +1,45 @@
+## package header
+package: {
+    name:    Trigger/TriggerSimulation/L1TopoCoreSimulation,
+    authors: [],
+
+
+    deps: {
+        public: [
+            LCG_Interfaces/Boost,
+            DetCommonPolicy,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    L1TopoCoreSimulation-install-headers: {
+        features: "detcommon_install_headers",
+    },
+    
+    L1TopoCoreSimulation: {
+        features: "detcommon_library",
+        source:   ["src/*.cxx"],
+        use: ["boost-system", "boost-filesystem"],
+    },
+    
+    TrigConfTopoTest: {
+        features: "trigconf_application",
+        source:   ["src/test/TopoTest.cxx"],
+        use: ["L1TopoCoreSimulation", "boost-thread", "boost-system", "boost-filesystem"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

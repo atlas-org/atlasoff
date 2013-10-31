@@ -1,0 +1,45 @@
+## package header
+package: {
+    name:    DetectorDescription/DetDescrCnvSvc,
+    authors: ["RD Schaffer <R.D.Schaffer@cern.ch>",
+              ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+        ],
+        private: [
+            Control/StoreGate,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+
+    DetDescrCnvSvc: {
+        features: "atlas_dual_use_library",
+        source:   "src/*.cxx",
+        use:      ["GaudiKernel",
+                   "StoreGate",
+                   ],
+    },
+
+    DetDescrCnvSvc-install-jobos: {
+        features: "atlas_install_joboptions",
+    },
+
+    DetDescrCnvSvc-install-python-modules: {
+        features: "atlas_install_python_modules",
+    },
+}
+
+## EOF ##

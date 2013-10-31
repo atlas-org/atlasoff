@@ -1,0 +1,83 @@
+## package header
+package: {
+    name:    Database/APR/RootCollection,
+    authors: [Marcin Nowak],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasROOT,
+        ],
+        private: [
+            External/AtlasCORAL,
+            External/AtlasReflex,
+            Database/PersistentDataModel,
+            Database/APR/POOLCore,
+            Database/APR/CollectionBase,
+            Database/APR/FileCatalog,
+            Database/APR/PersistencySvc,
+            External/GaudiInterface,
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    RootCollection: {
+        features: "atlas_library atlas_dictionary",
+        source:   ["src/*.cpp",
+                   #"${PACKAGE_ROOT}/${tag}/dict/AttributeListLayoutDict.cpp",
+                   "RootCollection/AttributeListLayout.h",
+                   ],
+        use: ["ROOT",
+              "CollectionBase",
+              "FileCatalog",
+              
+              ],
+        rootcint_linkdef: 'src/LinkDef.h',
+    },
+
+    # RootCollectionDict: {
+    #     features: "atlas_dictionary",
+    #     source:   "RootCollection/AttributeListLayout.h",
+    #     rootcint_linkdef: 'src/LinkDef.h',
+    #     use: ["ROOT"],
+    # },
+    
+    RootCollection-test-read: {
+        features: "atlas_unittest",
+        source:   ["test/read_test.cxx"],
+        use: ["RootCollection",
+              "ROOT-TreePlayer",
+              ],
+    },
+    
+    RootCollection-test-update: {
+        features: "atlas_unittest",
+        source:   ["test/update_test.cxx"],
+        use: ["RootCollection",
+              "ROOT-TreePlayer",
+              ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

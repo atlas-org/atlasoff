@@ -1,0 +1,30 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/AthenaPoolKernel,
+    authors: [RD Schaffer <R.D.Schaffer@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    AthenaPoolKernel: {
+        features: "atlas_install_headers",
+    },
+}
+
+## EOF ##

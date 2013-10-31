@@ -1,0 +1,38 @@
+## package header
+package: {
+    name:    DetectorDescription/IdDict,
+    authors: ["Christian Arnault <arnault@lal.in2p3.fr>",
+              "RD Schaffer <R.D.Schaffer@cern.ch>",
+              ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            DetectorDescription/Identifier,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    IdDict: {
+        features: "atlas_library",
+        source:   ["src/IdDictMgr.cxx",
+                   "src/IdDictFieldImplementation.cxx",
+                   ],
+        use:      ["Identifier"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

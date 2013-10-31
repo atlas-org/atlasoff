@@ -1,0 +1,74 @@
+## package header
+package: {
+    name:    Control/AthenaExamples/TBBExamples,
+    authors: [Paolo Calafiura <Paolo.Calafiura@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+        ],
+        private: [
+            External/AtlasBoost,
+            External/AtlasTBB,
+            Control/AthenaBaseComps,
+            Control/AthContainers,
+            Control/AthenaKernel,
+            Control/DataModel,
+            TestPolicy,
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    TBBExamples: {
+        features: "atlas_component",
+        source:   ["src/*.cxx", "src/components/*.cxx"],
+        use: [
+            "GaudiKernel",
+            "boost-system", "boost-filesystem",
+            "tbb",
+            "AthenaBaseComps",
+            "AthenaKernel",
+            "DataModel",
+            "AthContainers",
+            ],
+        cppflags: "-std=c++0x",
+    },
+    
+    TBBExamples-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+
+    TBBExamples-HelloParFor-test: {
+        features: "atlas_athenarun_test",
+        options:  "TBBExamples/HelloParForOptions.py",
+        ## FIXME
+        #post_script: "${TESTTOOLSROOT}/share/post.sh HelloParFor $(q)^Py:ConfigurableDb +(WARNING|INFO|ERROR)|Py:Athena +INFO including file |Warning in .TEnvRec::ChangeValue.: duplicate entry|ToolSvc.finalize.. +INFO|^WriteData +INFO in initialize$$| [A-Z]+ 2[0-9][0-9][0-9]$$$(SGGoptignore)|^Py:Athena +INFO|[Rr]oo[Ff]it|NIKHEF|DeprecationWarning: object.__new__|^  newobj =|^\*+$$|drop-and-reload|^ *$$|we will keep the configuration around|object not modifiable when retrieved|Retrieved const handle to default|type EventInfo$(q)",
+        use: ["TBBExamples"],
+    },
+
+    TBBExamples-HelloPipeAlg-test: {
+        features: "atlas_athenarun_test",
+        options:  "TBBExamples/HelloPipeOptions.py",
+        ## FIXME
+        #post_script: "${TESTTOOLSROOT}/share/post.sh HelloPipeAlg $(q)^Py:ConfigurableDb +(WARNING|INFO|ERROR)|Py:Athena +INFO including file |Warning in .TEnvRec::ChangeValue.: duplicate entry|ToolSvc.finalize.. +INFO|^WriteData +INFO in initialize$$| [A-Z]+ 2[0-9][0-9][0-9]$$$(SGGoptignore)|^Py:Athena +INFO|[Rr]oo[Ff]it|NIKHEF|DeprecationWarning: object.__new__|^  newobj =|^\*+$$|drop-and-reload|^ *$$|we will keep the configuration around|object not modifiable when retrieved|Retrieved const handle to default|type EventInfo$(q)",
+        use: ["TBBExamples"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

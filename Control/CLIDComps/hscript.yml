@@ -1,0 +1,82 @@
+## package header
+package: {
+    name:    Control/CLIDComps,
+    authors: [Paolo Calafiura <Paolo.Calafiura@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [
+            External/AtlasBoost,
+            External/GaudiInterface,
+            Control/AthenaKernel,
+            Control/SGTools,
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    CLIDComps: {
+        features: "atlas_component",
+        source:   ["src/*.cxx",
+                   "src/components/*.cxx"],
+        do_gencliddb: false,
+        use:      [
+            "GaudiKernel",
+            "AthenaKernel",
+            "SGTools",
+            "AtlasBoost",
+        ],
+    },
+    
+    CLIDComps-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   ["share/clid", "test/_clid_unittest.py"],
+    },
+    
+    CLIDComps-install-runtime: {
+        features: "atlas_install_data",
+        source:   ["share/Gaudi_clid.db"],
+    },
+    
+    CLIDComps-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    CLIDComps-test-ClassIDSvc: {
+        features: "atlas_unittest",
+        source:   ["test/ClassIDSvc_test.cxx"],
+        use: ["AtlasBoost", "GaudiKernel", "AthenaKernel", "SGTools", "TestTools"],
+        extrapatterns: ["WARNING Could not resolve clid DB|^JobOptionsSvc +INFO"],
+    },
+    
+    CLIDComps-test-CLIDRegistry: {
+        features: "atlas_unittest",
+        source:   ["test/CLIDRegistry_test.cxx"],
+        use: ["AtlasBoost", "GaudiKernel", "AthenaKernel", "SGTools", "TestTools"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

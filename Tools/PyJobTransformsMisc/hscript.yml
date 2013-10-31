@@ -1,0 +1,37 @@
+## package header
+package: {
+    name:    Tools/PyJobTransformsMisc,
+    authors: [],
+
+
+    deps: {
+        public: [
+            Tools/PyJobTransforms,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    PyJobTransformsMisc-install-trfs: {
+        features: "atlas_install_trfs",
+        trf_jo: ["share/skeleton.*.py"],
+        trf_tfs: ["scripts/*.py"],
+    },
+    
+    PyJobTransformsMisc-make-trf-signatures: {
+        features: "make_trf_signatures",
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

@@ -1,0 +1,43 @@
+## package header
+package: {
+    name:    Control/AthenaExamples/ToyConversion,
+    authors: ["Paolo Calafiura <Paolo.Calafiura@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            Control/CLIDSvc,
+            Control/SGTools,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+
+    ToyConversion: {
+        features: "atlas_dual_use_library",
+        source:   ["src/*.cxx"],
+        use:      ["GaudiKernel", "SGTools", "CLIDSvc"],
+    },
+
+    ToyConversion-install-headers: {
+        features: "atlas_install_headers",
+    },
+
+    ToyConversion-install-jobos: {
+        features: "atlas_install_joboptions",
+    },
+}
+
+## EOF ##

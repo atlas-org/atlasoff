@@ -1,0 +1,61 @@
+## package header
+package: {
+    name:    Trigger/TrigConfiguration/TriggerTool,
+    authors: [Tiago.Perez@cern.ch],
+    managers: [Tiago.Perez@cern.ch],
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            Trigger/TrigConfiguration/TriggerMenuCompiler,
+            Trigger/TrigConfiguration/TrigDb,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+
+    TriggerTool: {
+        features: "detcommon_ant",
+        source: "ant/build.xml",
+        properties: "DBSchemaBaseDir=Trigger/TrigConfiguration/TrigDb",
+        # to restrict memory for ANT (which starts Java) - necessary on SLC4 64bit
+        # 8GB memory lxplus machines
+        ant_opts: ["-Xms128m", "-Xmx128m", "-XX:ReservedCodeCacheSize=128m",],
+        install_path: "${INSTALL_AREA}/share/lib",
+    },
+
+    ## FIXME
+    # TriggerTool-generic-install--jars: {
+    #     features: "detcommon_generic_install",
+    #     source:   ["lib/*.jar"],
+    #     install_prefix: ["share/lib"],
+    # },
+    
+    TriggerTool-generic-install--scripts: {
+        features: "detcommon_generic_install",
+        source:   ["scripts/run_TriggerTool.sh",
+                   "scripts/replicateTriggerDB.py"],
+        install_prefix: ["share/bin"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

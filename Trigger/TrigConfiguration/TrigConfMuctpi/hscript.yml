@@ -1,0 +1,54 @@
+## package header
+package: {
+    name:    Trigger/TrigConfiguration/TrigConfMuctpi,
+    authors: [Attila Krasznahorkay <Attila.Krasznahorkay@cern.ch>],
+
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            LCG_Interfaces/XercesC,
+        ],
+        private: [
+            LCG_Interfaces/Boost,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    TrigConfMuctpi: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: ["XercesC", "boost-system", "boost-filesystem"],
+    },
+    
+    TrigConfMuctpi-install-headers: {
+        features: "detcommon_install_headers",
+    },
+    
+    TrigConfMuctpi-generic-install: {
+        features: "detcommon_generic_install",
+        source:   ["data/*.xml", "data/*.dtd"],
+        install_prefix: ["XML/TrigConfMuctpi"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

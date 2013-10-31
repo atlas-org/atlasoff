@@ -1,0 +1,46 @@
+## package header
+package: {
+    name:    Database/ConnectionManagement/DBReplicaSvc,
+    authors: ["Richard Hawkings <richard.hawkings@cern.ch>",
+              ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            External/AtlasCORAL,
+        ],
+        private: [
+            Tools/PathResolver,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    DBReplicaSvc: {
+        features: "atlas_component",
+        source:   ["src/DBReplicaSvc.cxx", "src/components/*.cxx"],
+        use: [
+            "GaudiKernel",
+            "CORAL",
+            "PathResolver",
+            "boost-filesystem",
+        ],
+    },
+
+    DBReplicaSvc-install-headers: {
+        features: "atlas_install_headers",
+    },
+
+}
+
+## EOF ##

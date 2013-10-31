@@ -1,0 +1,67 @@
+## package header
+package: {
+    name:    Database/CoralDB,
+    authors: [Juerg Beringer <JBeringer@lbl.gov>],
+
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            LCG_Interfaces/CORAL,
+            LCG_Interfaces/COOL,
+            LCG_Interfaces/Boost,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    CoralDB: {
+        features: "atlas_library",
+        source:   [
+            "src/Alias.cxx",
+            "src/CompoundTag.cxx",
+            "src/Connection.cxx",
+            "src/Encodable.cxx",
+            "src/CoralDB.cxx",
+        ],
+        use: [
+            "CORAL",
+            "CORAL-Relational-Access",
+            "COOL",
+            "boost-system", "boost-filesystem",
+        ],
+    },
+    
+    CoralDB-install-headers: {
+        features: "detcommon_install_headers",
+    },
+    
+    ccdb: {
+        features: "atlas_application",
+        source:   ["src/ccdb.cxx"],
+        use:      ["CoralDB"],
+    },
+    
+    ccdb-migrate: {
+        features: "atlas_application",
+        source:   ["src/ccdb-migrate.cxx"],
+        use:      [
+            "CoralDB",
+            "boost-program_options",
+        ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

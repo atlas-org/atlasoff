@@ -1,0 +1,63 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/OutputStreamAthenaPool,
+    authors: [Peter van Gemmeren <gemmeren@anl.gov>],
+
+
+    deps: {
+        public: [],
+        private: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            Control/AthenaKernel,
+            Control/AthenaBaseComps,
+            Control/SGTools,
+            Control/StoreGate,
+            Event/EventInfo,
+            Database/PersistentDataModel,
+            Database/AthenaPOOL/AthenaPoolKernel,
+            Database/AthenaPOOL/AthenaPoolUtilities,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    OutputStreamAthenaPool: {
+        features: "atlas_component",
+        source:   [
+            "src/AthenaPoolOutputStreamTool.cxx",
+            "src/MakeEventStreamInfo.cxx",
+            "src/CopyEventStreamInfo.cxx",
+            "src/MakeInputDataHeader.cxx",
+            "src/components/*.cxx",
+            ],
+        use: ["GaudiKernel", "AthenaKernel", "AthenaBaseComps",
+              "SGTools", "CLIDSvc",
+              "StoreGate", "EventInfo", "PersistentDataModel",
+              "AthenaPoolKernel", "AthenaPoolUtilities",
+              "CORAL",             
+              ],
+    },
+    
+    OutputStreamAthenaPool-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    OutputStreamAthenaPool-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

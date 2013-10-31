@@ -1,0 +1,48 @@
+## package header
+package: {
+    name:    DetectorDescription/GeoModel/GeoModelUtilities,
+    authors: ["Vakho Tsulaia"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            DetectorDescription/GeoModel/GeoModelKernel,
+            Control/AthenaBaseComps,
+            External/AtlasCLHEP,
+            Control/CLIDSvc,
+            Database/AthenaPOOL/RDBAccessSvc,
+            DetectorDescription/GeoModel/GeoModelInterfaces,
+        ],
+        private: [
+            External/GaudiInterface,
+            DetectorDescription/GeoModel/GeoModelInterfaces,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    GeoModelUtilities: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      [
+            "GaudiKernel",
+            "AthenaBaseComps",
+            "CLIDSvc",
+            "GeoModelKernel",
+            "GeoModelInterfaces",
+            "RDBAccessSvc",
+            "CLHEP",
+        ],
+    },
+}
+
+## EOF ##

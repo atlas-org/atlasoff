@@ -1,0 +1,90 @@
+## package header
+package: {
+    name:    Control/StoreGateTests,
+    authors: [Sebastien Binet <binet@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            Control/StoreGate,
+            Control/CLIDSvc,
+            Control/SGTools,
+            Control/DataModel,
+            Control/AthContainers,
+            Control/AthenaPython,
+        ],
+        private: [
+            External/AtlasReflex,
+        ],
+        runtime: [
+            Control/AthenaPython,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    StoreGateTests: {
+        features: "atlas_component",
+        source:   [
+            "src/*.cxx",
+            "src/components/*.cxx",
+            ],
+        use: [
+            "GaudiKernel",
+            "StoreGate",
+            "CLIDSvc",
+            "SGTools",
+            "DataModel",
+            "AthContainers",
+            "AthenaPython",
+            ],
+    },
+    
+    StoreGateTests-install-headers: {
+        features: "atlas_install_headers",
+    },
+    
+    StoreGateTests-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    StoreGateTests-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    StoreGateTestsDict: {
+        features: "atlas_dictionary",
+        source:   ["StoreGateTests/StoreGateTestsDict.h"],
+        use: [
+            "StoreGateTests",
+            "SGTools",
+            "CLIDSvc",
+            "DataModel",
+            "AthContainers",
+        ],
+        selection_file: ["StoreGateTests/selection.xml"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

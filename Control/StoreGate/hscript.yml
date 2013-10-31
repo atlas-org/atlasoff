@@ -1,0 +1,77 @@
+## package header
+package: {
+    name:    Control/StoreGate,
+    authors: ["Paolo Calafiura <Paolo.Calafiura@cern.ch>",
+              "Hong Ma <hma@bnl.gov>",
+              "Srini Rajagopalan <srinir@bnl.gov>",
+              "Wim Lavrijsen <WLavrijsen@lbl.gov>",
+              ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/AthenaKernel,
+            Control/SGTools,
+            External/AtlasBoost,
+            External/GaudiInterface,
+            Control/AthAllocators,
+        ],
+        private: [
+            Control/CxxUtils,
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+
+    StoreGate: {
+        features: "atlas_dual_use_library",
+        source:   "src/*.cxx",
+        use:      [
+            "GaudiKernel",
+            "AthenaKernel",
+            "SGTools",
+            "AthAllocators",
+            "CxxUtils",
+        ],
+        defines: ["HAVE_ITERATOR", "HAVE_NEW_IOSTREAMS"],
+        cppflags: ["-ftemplate-depth-99"],
+    },
+
+    StoreGate-install-jobos: {
+        features: "atlas_install_joboptions",
+    },
+    
+    StoreGate-install-python-modules: {
+        features: "atlas_install_python_modules",
+    },
+    
+    ## --- tests ---
+    SGtests: {
+        features: "atlas_unittest",
+        source:   ["test/SGtests.cxx"],
+        use: ["StoreGate",
+              ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

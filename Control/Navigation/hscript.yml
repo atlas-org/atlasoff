@@ -1,0 +1,84 @@
+## package header
+package: {
+    name:    Control/Navigation,
+    authors: ["Peter Loch <loch@physics.arizona.edu>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasBoost,
+            Control/CxxUtils,
+            Control/AthAllocators,
+            Control/AthLinks,
+            Control/DataModel,
+            Control/AthenaKernel,
+        ],
+        private: [
+            External/GaudiInterface,
+            Control/AthContainers,
+            Control/SGTools,
+            LCG_Interfaces/uuid,
+            External/AtlasReflex,
+            AtlasTest/TestTools,
+        ],
+        runtime: [
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    Navigation: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      [
+            "CxxUtils",
+            "AthAllocators",
+            "AthLinks",
+            "DataModel",
+            "AthenaKernel",
+            "boost-system", "boost-filesystem",
+            "SGTools",
+            "GaudiKernel",
+            "uuid",
+        ],
+    },
+    
+    NavigationDict: {
+        features: "atlas_dictionary",
+        source:   "Navigation/NavigationDict.h",
+        selection_file: "Navigation/selection.xml",
+        use: ["Navigation"],
+    },
+
+    Navigation-test-NavigationToken: {
+        features: "atlas_unittest",
+        source:   "test/NavigationToken_test.cxx",
+        use:      ["Navigation", "AthContainers"],
+    },
+    
+    applNavigation-test-NavigableIterator: {
+        features: "atlas_unittest",
+        source:   "test/NavigableIterator_test.cxx",
+        use:      ["Navigation", "AthContainers"],
+    },
+    
+    applNavigation-test-AthenaBarCodeImpl: {
+        features: "atlas_unittest",
+        source:   "test/AthenaBarCodeImpl_test.cxx",
+        use:      ["Navigation"],
+        extrapatterns: "found service JobIDSvc",
+    },
+    
+}
+
+## EOF ##

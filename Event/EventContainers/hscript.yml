@@ -1,0 +1,51 @@
+## package header
+package: {
+    name:    Event/EventContainers,
+    authors: [],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            DetectorDescription/Identifier,
+        ],
+        private: [
+            Control/CLIDSvc,
+            Control/SGTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    EventContainers-testIdCont: {
+        features: "atlas_unittest",
+        source:   ["ID_ContainerTest.cxx"],
+        use:      [
+            "CLIDSvc",
+            "SGTools",
+            "Identifier",
+            "GaudiKernel",
+        ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

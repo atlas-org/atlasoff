@@ -1,0 +1,51 @@
+## package header
+package: {
+    name:    Database/TPTools,
+    authors: [Marcin.Nowak@cern.ch],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/AthenaKernel,
+            External/GaudiInterface,
+            Database/AthenaPOOL/AthenaPoolUtilities,
+        ],
+        private: [
+            Database/PersistentDataModel,
+            External/AtlasReflex,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    TPTools: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: [
+            "AthenaKernel",
+            "GaudiKernel",
+            "AthenaPoolUtilities",
+            "PersistentDataModel",
+        ],
+        cxxflags: ["-std=c++0x"],
+    },
+    
+    TPToolsDict: {
+        features: "atlas_dictionary",
+        source:   ["TPTools/TPToolsDict.h"],
+        selection_file: "TPTools/selection.xml",
+        use:      ["TPTools"],
+    },
+
+}
+
+## EOF ##

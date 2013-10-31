@@ -1,0 +1,62 @@
+## package header
+package: {
+    name:    Control/AthenaExamples/AthExFortranAlgorithm,
+    authors: [Paolo Calafiura <Paolo.Calafiura@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            AtlasFortranPolicy,
+            External/GaudiInterface,
+            Control/AthenaBaseComps,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    AthExFortranAlgorithm: {
+        features: "atlas_component fcshlib",
+        source:   [
+            "src/*.cxx",
+            "src/*.F",
+            "src/components/*.cxx",
+            ],
+        use: [
+            "GaudiKernel",
+            "AthenaBaseComps",
+        ],
+        FCFLAGS: ["-fPIC"],
+    },
+    
+    AthExFortranAlgorithm-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   ["scripts/*"],
+    },
+    
+    AthExFortranAlgorithm-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

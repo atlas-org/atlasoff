@@ -1,0 +1,48 @@
+## package header
+package: {
+    name:    Control/IOVSvc,
+    authors: ["Charles Leggett <Charles.Leggett@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/SGTools,
+            Control/AthenaKernel,
+            External/AtlasBoost,
+            External/GaudiInterface,
+        ],
+        private: [
+            Control/StoreGate,
+            Event/EventInfo,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    IOVSvc: {
+        features: "atlas_dual_use_library",
+        source:   "src/*.cxx",
+        use:      [
+            GaudiKernel,
+            AthenaKernel,
+            SGTools,
+            StoreGate,
+            EventInfo,
+            boost,
+        ],
+    },
+
+    IOVSvc-install-jobos: {
+        features: "atlas_install_joboptions",
+    },
+}
+
+## EOF ##

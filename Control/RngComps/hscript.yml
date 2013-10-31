@@ -1,0 +1,103 @@
+## package header
+package: {
+    name:    Control/RngComps,
+    authors: ["Atlas Collaboration"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [
+            External/GaudiInterface,
+            External/AtlasCLHEP,
+            External/AtlasBoost,
+            Control/AthenaKernel,
+            Control/AthenaBaseComps,
+            Control/StoreGate,
+            Event/EventInfo,
+            Simulation/Tools/AtlasCLHEP_RandomGenerators,
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    RngComps: {
+        features: "atlas_component",
+        source:   ["src/*.cxx", "src/components/*.cxx"],
+        use: [
+            "GaudiKernel",
+            "CLHEP",
+            "boost-system", "boost-filesystem",
+            "AthenaKernel",
+            "AthenaBaseComps",
+            "StoreGate",
+            "EventInfo",
+            "AtlasCLHEP_RandomGenerators",
+        ],
+    },
+    
+    RngComps-install-py: {
+        features: "atlas_install_python_modules",
+    },
+
+    RngComps-install-jobos: {
+        features: "atlas_install_joboptions",
+    },
+
+    ## -- tests --
+
+    # Line numbers not right on x86_64?
+    RngComps-test-AtRndmGen: {
+        features: "atlas_unittest",
+        source:   "test/AtRndmGen_test.cxx",
+        use:      [
+            "RngComps",
+            "StoreGate",
+            "AthenaKernel",
+            "CLHEP",
+            ],
+        extrapatterns: "//GP:|^IncidentSvc *DEBUG Adding .* listener|^JobOptionsSvc +INFO",
+    },
+
+    RngComps-test-AtRanlux: {
+        features: "atlas_unittest",
+        source:   "test/AtRanlux_test.cxx",
+        use:      [
+            "RngComps",
+            "StoreGate",
+            "AthenaKernel",
+            "CLHEP",
+            ],
+        extrapatterns: "^IncidentSvc *DEBUG Adding .* listener|^JobOptionsSvc +INFO",
+    },
+
+    RngComps-test-AtDSFMT: {
+        features: "atlas_unittest",
+        source:   "test/AtDSFMT_test.cxx",
+        use:      [
+            "RngComps",
+            "StoreGate",
+            "AthenaKernel",
+            "CLHEP",
+            ],
+        extrapatterns: "^IncidentSvc *DEBUG Adding .* listener|^JobOptionsSvc +INFO",
+    },
+
+    RngComps-test-TestSeedRunEvent: {
+        features: "atlas_athenarun_test",
+        joboptions: "RngComps/TestSeedRunEvent.py",
+        post_script: "post.sh TestSeedRunEvent $(q)SGAudSvc +INFO Finalizing|SGAudSvc +INFO Initializing|No duplicates have been found|duplicate entry.*ignored|^Py:ConfigurableDb WARNING|Read module info for|^ToolSvc.* INFO( finalize:)? Removing all tools|^CoreDumpSvc *INFO Handling signals|types added|including file|^(Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)|local .* libGaudiKernelDict.so|^Number of My|^Py:Athena +INFO using release|^StoreGateSvc +INFO Start|^Py:AthenaDsoDb +INFO could not install alias|Bindings.py:660newobj = object.__new__|Updating ROOT::Reflex::PluginService::SetDebug$(q)",
+    },
+}
+
+## EOF ##

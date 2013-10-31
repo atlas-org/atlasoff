@@ -1,0 +1,52 @@
+## package header
+package: {
+    name:    Database/CoraCool,
+    authors: [Richard Hawkings <richard.hawkings@cern.ch>],
+
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            LCG_Interfaces/CORAL,
+            LCG_Interfaces/COOL,
+            LCG_Interfaces/Boost,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+    apply-tags: [
+        NEEDS_COOL_FACTORY,
+        NEEDS_CORAL_RELATIONAL_ACCESS,
+    ],
+}
+
+build: {
+    
+    CoraCool: {
+        features: "atlas_library",
+        source:   [
+            "src/CoraCoolDatabaseSvcFactory.cxx",
+            "src/CoraCoolDatabaseSvc.cxx",
+            "src/CoraCoolDatabase.cxx",
+            "src/CoraCoolSequence.cxx",
+            "src/CoraCoolFolder.cxx",
+            "src/CoraCoolObject.cxx",
+            "src/CoraCoolObjectIter.cxx",
+            ],
+        use: ["CORAL", "COOL", "boost-system", "boost-filesystem"],
+    },
+    
+    CoraCool-install-headers: {
+        features: "detcommon_install_headers",
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

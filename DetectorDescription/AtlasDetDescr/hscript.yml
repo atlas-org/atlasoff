@@ -1,0 +1,45 @@
+## package header
+package: {
+    name:    DetectorDescription/AtlasDetDescr,
+    authors: ["RD Schaffer <R.D.Schaffer@cern.ch>",
+              ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            DetectorDescription/Identifier,
+            DetectorDescription/IdDict,
+            Control/SGTools,
+        ],
+        private: [
+            External/GaudiInterface,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    AtlasDetDescr: {
+        features: "atlas_library",
+        source:   ["src/AtlasDetectorID.cxx",
+                   "src/AtlasDetectorIDHelper.cxx"],
+        use:      [
+            "GaudiKernel",
+            "Identifier",
+            "IdDict",
+            "SGTools",
+            ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

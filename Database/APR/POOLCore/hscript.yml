@@ -1,0 +1,40 @@
+## package header
+package: {
+    name:    Database/APR/POOLCore,
+    authors: ["Marcin Nowak",
+              ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasCORAL,
+            External/AtlasBoost
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    POOLCore: {
+        features: "atlas_library",
+        source:   ["src/*.cpp"],
+        use:      [
+            "CORAL",
+            "boost-system", "boost-filesystem",
+        ],
+    },
+
+    
+    hwaf-call: [],
+}
+
+## EOF ##

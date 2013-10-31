@@ -1,0 +1,86 @@
+## package header
+package: {
+    name:    Trigger/TrigConfiguration/TrigConfStorage,
+    authors: [David.Berge@cern.ch,Joerg.Stelzer@cern.ch],
+    managers: [David.Berge@cern.ch,Joerg.Stelzer@cern.ch],
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            LCG_Interfaces/COOL,
+            LCG_Interfaces/CORAL,
+            LCG_Interfaces/Reflex,
+            LCG_Interfaces/Boost,
+            Trigger/TrigConfiguration/TrigConfBase,
+            Trigger/TrigConfiguration/TrigConfL1Data,
+            Trigger/TrigConfiguration/TrigConfJobOptData,
+            Trigger/TrigConfiguration/TrigConfHLTData,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    TrigConfStorage: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: ["COOL", "CORAL", "Reflex", "Boost", "TrigConfBase", "TrigConfL1Data", "TrigConfJobOptData", "TrigConfHLTData"],
+    },
+    
+    TrigConfStorage-install-headers: {
+        features: "detcommon_install_headers",
+    },
+    
+    TrigConf2COOLApp: {
+        features: "trigconf_application",
+        source:   ["src/test/2COOLApp.cxx"],
+        use: ["TrigConfStorage", "boost-thread", "COOL", "CORAL", "Reflex",
+              "TrigConfBase", "TrigConfL1Data", "TrigConfJobOptData", "TrigConfHLTData"],
+    },
+    
+    TrigConfConsistencyChecker: {
+        features: "trigconf_application",
+        source:   ["src/test/ConsistencyChecker.cxx"],
+        use: ["TrigConfStorage", "boost-thread", "COOL", "CORAL", "Reflex",
+              "TrigConfBase", "TrigConfL1Data", "TrigConfJobOptData", "TrigConfHLTData"],
+    },
+    
+    TrigConfReadWrite: {
+        features: "trigconf_application",
+        source:   ["src/test/ReadWrite.cxx"],
+        use: ["TrigConfStorage", "boost-thread", "COOL", "CORAL", "Reflex",
+              "TrigConfBase", "TrigConfL1Data", "TrigConfJobOptData", "TrigConfHLTData"],
+    },
+    
+    TrigConfStorage-generic-install-python_scripts-scripts: {
+        features: "detcommon_generic_install",
+        source:   ["scripts/*.py"],
+        install_prefix: ["share/bin"],
+    },
+    
+    TrigConfStorage-generic-install-python_mods-python_modules: {
+        features: "detcommon_generic_install",
+        source:   ["python/*.py"],
+        install_prefix: ["python/TrigConfStorage"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

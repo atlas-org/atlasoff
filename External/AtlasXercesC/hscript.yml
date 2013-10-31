@@ -1,0 +1,27 @@
+## package header
+package: {
+    name:    External/AtlasXercesC,
+    authors: [arnault@lal.in2p3.fr],
+
+
+    deps: {
+        public: [
+            External/ExternalPolicy,
+            LCG_Interfaces/XercesC,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+
+}
+
+## EOF ##

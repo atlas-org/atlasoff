@@ -1,0 +1,59 @@
+## package header
+package: {
+    name:    Trigger/TrigConfiguration/AutoPrescaleTool,
+    authors: [martin.goebel@cern.ch],
+    managers: [martin.goebel@cern.ch],
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            LCG_Interfaces/ROOT,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    AutoPrescaleTool: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: ["ROOT"],
+    },
+    
+    AutoPrescaleTool-install-headers: {
+        features: "detcommon_install_headers",
+    },
+    
+    AutoPSOnlyL1: {
+        features: "atlas_application",
+        source:   ["src/test/AutoPSOnlyL1.cxx"],
+        use: ["ROOT", "ROOT-XMLParser", "AutoPrescaleTool"],
+    },
+    
+    AutoPrescaleTool-generic-install-AP_XML-XML: {
+        features: "detcommon_generic_install",
+        source:   ["share/*.xml",
+                   "share/*.dtd"],
+        install_prefix: ["XML/AutoPrescaleTool"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

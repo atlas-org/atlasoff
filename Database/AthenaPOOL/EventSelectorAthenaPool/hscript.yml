@@ -1,0 +1,71 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/EventSelectorAthenaPool,
+    authors: [],
+
+
+    deps: {
+        public: [],
+        private: [
+            AtlasPolicy,
+            External/AtlasPOOL,
+            External/AtlasCORAL,
+            External/GaudiInterface,
+            Control/AthenaKernel,
+            Control/AthenaBaseComps,
+            Control/StoreGate,
+            Database/PersistentDataModel,
+            Database/AthenaPOOL/AthenaPoolCnvSvc,
+            Database/AthenaPOOL/AthenaPoolUtilities,
+            Database/AthenaPOOL/DBDataModel,
+            Database/AthenaPOOL/PoolSvc,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    EventSelectorAthenaPool: {
+        features: "atlas_component",
+        source:   [
+            "src/AthenaPoolAddressProviderSvc.cxx",
+            "src/CondProxyProvider.cxx",
+            "src/EventSelectorAthenaPool.cxx",
+            "src/PoolCollectionConverter.cxx",
+            "src/registerKeys.cxx",
+            "src/TagRemappingTool.cxx",
+            "src/components/*.cxx",
+        ],
+        use: [
+            "POOL",
+            "CORAL",
+            "GaudiKernel",
+            "AthenaKernel",
+            "AthenaBaseComps",
+            "StoreGate",
+            "PersistentDataModel",
+            "AthenaPoolCnvSvc",
+            "AthenaPoolUtilities",
+            "DBDataModel",
+            "PoolSvc",
+        ],
+    },
+
+    EventSelectorAthenaPool-install-jobos: {
+        features: "atlas_install_joboptions",
+    },
+
+    EventSelectorAthenaPool-install-py: {
+        features: "atlas_install_python_modules",
+    },
+}
+
+## EOF ##

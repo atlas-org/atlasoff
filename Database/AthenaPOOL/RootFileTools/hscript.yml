@@ -1,0 +1,108 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/RootFileTools,
+    authors: ["Ilija Vukotic",
+              "Gerhard Brandt"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+        ],
+        private: [
+            Control/AthenaBaseComps,
+            External/AtlasROOT,
+            External/AtlasReflex,
+            Database/PersistentDataModel,
+        ],
+        runtime: [
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+        orderFile: "orderFile.py",
+        optimizeBasketsSizes: "optimizeBS.py",
+        showTrees: "showTrees.py",
+        mergeD3PD: "mergeD3PD.exe",
+    },
+}
+
+build: {
+    
+    mergePOOL: {
+        features: "atlas_application",
+        source:   ["src/merge.cxx"],
+        use:      ["ROOT",
+                   "GaudiKernel",
+                   "PersistentDataModel"],
+    },
+    
+    mergeD3PD: {
+        features: "atlas_application",
+        source:   ["src/mergeD3PD.cxx"],
+        use:      ["ROOT"],
+    },
+    
+    checkCache: {
+        features: "atlas_application",
+        source:   ["src/checkCache.cxx"],
+        use:      ["ROOT"],
+    },
+    
+    RootFileTools: {
+        features: "atlas_component",
+        source:   [
+            "src/cobs.cxx",
+            "src/RootFileTransformationsTool.cxx",
+            "src/DumpAll.cxx",
+            "src/HistoPile.cxx",
+            "src/components/*.cxx",
+            ],
+        use:      ["ROOT",
+                   "GaudiKernel",
+                   "Reflex",
+                   "Cintex",
+                   "PersistentDataModel",
+                   "AthenaBaseComps"],
+    },
+
+    releaseFileCache: {
+        features: "atlas_application",
+        source: "src/releaseFileCache.cxx",
+    },
+
+    RootFileTools-install-py: {
+        features: "atlas_install_python_modules",
+    },
+
+    RootFileTools-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   ["share/orderFile.py",
+                   "share/optimizeBS.py",
+                   "share/showTrees.py",
+                   ],
+    },
+
+    RootFileToolsDict: {
+        features: "atlas_dictionary",
+        source:   "RootFileTools/RootFileToolsDict.h",
+        selection_file: "RootFileTools/selection.xml",
+        includes: "src",
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

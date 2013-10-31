@@ -1,0 +1,101 @@
+## package header
+package: {
+
+    # This package sets up the runtime environment for an Athena-based
+    # application.
+    name:    Control/MinimalRunTime,
+    authors: ["Christian Arnault <arnault@lal.in2p3.fr>",
+              "David Quarrie <David.Quarrie@cern.ch>",
+              ],
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/AthenaCommon,
+            Control/AthenaKernel,
+            Control/AthenaServices,
+            Control/CLIDSvc,
+            Control/DataModel,
+            Control/SGTools,
+            Control/StoreGate,
+            DetectorDescription/DetDescrCnvSvc,
+            DetectorDescription/IdDictDetDescrCnv,
+            Control/IOVSvc,
+            Generators/McEventSelector,
+            External/GaudiInterface,
+            GaudiAlg,
+            GaudiAud,
+            GaudiKernel,
+            GaudiPython,
+            GaudiSvc,
+            PartPropSvc,
+            RootHistCnv,
+            External/AtlasReflex,
+            External/AtlasCOOL,
+            External/AtlasOracle,
+            External/AtlasRELAX,
+            External/AtlasReflex,
+            External/AtlasCORAL,
+            External/SLC5_Compat,
+            #External/AtlasShift,
+            External/AtlasDCACHE,
+            External/AtlasDPM,
+            Database/ConnectionManagement/AtlasAuthentication,
+        ],
+        private: [],
+        runtime: [
+            #---------------------------------------------------------------------
+            # Setup the minimal environment for Athena
+            Control/AthenaCommon,
+            Control/AthenaKernel,
+            Control/AthenaServices,
+            Control/CLIDSvc,
+            Control/DataModel,
+            Control/SGTools,
+            Control/StoreGate,
+            DetectorDescription/DetDescrCnvSvc,
+            DetectorDescription/IdDictDetDescrCnv,
+
+            # The startup of the IOVSvc appears to be hard-wired into athena.py 
+            # for now, so the following is necessary
+            Control/IOVSvc,
+
+            # Assume the McEventSelector by default
+            Generators/McEventSelector,
+            
+            #---------------------------------------------------------------------
+            # Setup the runtime environment for minimal Gaudi packages
+            External/GaudiInterface,
+            
+            #---------------------------------------------------------------------
+            # Setup the runtime environment for minimal external packages
+            External/AtlasReflex,
+            External/AtlasCOOL,
+            External/AtlasOracle,
+            External/AtlasRELAX,
+            External/AtlasReflex,
+            External/AtlasCORAL,
+            External/SLC5_Compat,
+            #External/AtlasShift,
+            External/AtlasDCACHE,
+            External/AtlasDPM,
+
+            #---------------------------------------------------------------------
+            # Setup the runtime environment for db authenticaion 
+            Database/ConnectionManagement/AtlasAuthentication,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+
+}
+
+## EOF ##

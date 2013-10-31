@@ -1,0 +1,64 @@
+## package header
+
+# Description:-
+#	This package contains the following release-related scripts:-
+#
+#		checkreq.sh	Checks requirements files
+#               get_joboptions  get jo files from installation area to the current directory
+#               get_files       get any file from installation area to the current directory
+#               lookup_xxx.sh   helper scripts for the auto-completion mechanisms
+#
+#	Refer to the doc/README file for more details. The scripts
+#	are installed in the InstallArea/share/bin directory within
+#	a release.
+
+package: {
+    name:    Tools/Scripts,
+    authors: ["Christian Arnault <arnault@lal.in2p3.fr>",
+              "Claire Bourdarios <Claire.Bourdarios@cern.ch>",
+              "Jakob Nielsen <langgard@alf.nbi.dk>",
+              "David Quarrie <David.Quarrie@cern.ch>",
+              ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+        
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    Scripts-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   [
+            "share/lookup_local_joboptions.sh",
+            "share/lookup_joboptions.sh",
+            "share/lookup_scripts.sh",
+            "share/lookup_xmls.sh",
+            "share/lookup_data.sh",
+            # "share/setup_completion.zsh",
+            # "share/setup_completion.tcsh",
+            # "share/setup_completion.bash",
+            "share/checkDbgSymbols.sh",
+            ],
+    },
+}
+
+## EOF ##

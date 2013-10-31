@@ -1,0 +1,100 @@
+## package header
+package: {
+    name:    Control/SGTools,
+    authors: ["Paolo Calafiura <Paolo.Calafiura@cern.ch>",
+              "Srini Rajagopalan <srinir@bnl.gov>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/CxxUtils,
+            Control/AthenaKernel,
+            External/AtlasBoost,
+            External/GaudiInterface,
+        ],
+        private: [
+            Control/SGMon/SGAudCore,
+            AtlasTest/TestTools,
+            External/AtlasReflex,
+        ],
+        runtime: [
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    SGTools: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: [
+            "AthenaKernel",
+            "GaudiKernel",
+            "CxxUtils",
+            "SGAudCore",
+            "boost-thread",
+            ],
+    },
+
+    SGToolsDict: {
+        features: "atlas_dictionary",
+        source: "SGTools/SGToolsDict.h",
+        selection_file: "SGTools/selection.xml",
+        use:      ["SGTools"],
+    },
+    
+
+    SGTools-VersionedKey: {
+        features: ["atlas_unittest"],
+        source: "test/VersionedKey_test.cxx",
+        use:      ["SGTools"],
+    },
+    
+    SGTools-DataBucket: {
+        features: ["atlas_unittest"],
+        source: "test/DataBucket_test.cxx",
+        extrapatterns: "^HistogramPersis.* INFO",
+        use:      ["SGTools"],
+    },
+    
+    SGTools-BaseInfo: {
+        features: ["atlas_unittest"],
+        source: "test/BaseInfo_test.cxx",
+        use:      ["SGTools"],
+    },
+    
+    SGTools-safe_clid: {
+        features: ["atlas_unittest"],
+        source: "test/safe_clid_test.cxx",
+        use:      ["SGTools"],
+    },
+    
+    SGTools-crc64: {
+        features: ["atlas_unittest"],
+        source: "test/crc64_test.cxx",
+        use:      ["SGTools"],
+    },
+    
+    SGTools-StringPool: {
+        features: ["atlas_unittest"],
+        source: "test/StringPool_test.cxx",
+        use:      ["SGTools"],
+    },
+    
+    SGTools-ClassName: {
+        features: ["atlas_unittest"],
+        source: "test/ClassName_test.cxx",
+        use:      ["SGTools"],
+    },
+    
+}
+
+## EOF ##

@@ -1,0 +1,62 @@
+## package header
+package: {
+    name:    Tools/LWHists,
+    authors: ["Thomas Kittelmann <thomas.kittelmann@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [
+            External/AtlasROOT,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    LWHists: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      ["ROOT"],
+        cxxflags: ["-fno-tree-vectorize"],
+    },
+    
+    lwhists_validate: {
+        features: "atlas_application hwaf_utest",
+        source:   ["src/tests/validation/*.cxx"],
+        use:      ["ROOT", "LWHists"],
+    },
+    
+    lwhists_benchmark: {
+        features: "atlas_application hwaf_utest",
+        source:   ["src/tests/benchmarking/*.cxx"],
+        use:      ["ROOT", "LWHists"],
+    },
+    
+    lwhists_comphistfiles: {
+        features: "atlas_application hwaf_utest",
+        source:   ["src/tests/comphistfiles/*.cxx"],
+        use:      ["ROOT"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

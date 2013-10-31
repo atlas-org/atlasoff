@@ -1,0 +1,37 @@
+## package header
+package: {
+    name:    Trigger/TrigConfiguration/TrigConfJobOptData,
+    authors: [David.Berge@cern.ch,Joerg.Stelzer@cern.ch],
+    managers: [David.Berge@cern.ch,Joerg.Stelzer@cern.ch],
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            Trigger/TrigConfiguration/TrigConfL1Data,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    TrigConfJobOptData: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: ["TrigConfL1Data"],
+    },
+    
+    TrigConfJobOptData-install-headers: {
+        features: "detcommon_install_headers",
+    },
+}
+
+## EOF ##

@@ -1,0 +1,72 @@
+## package header
+package: {
+    name:    Database/IOVDbTPCnv,
+    authors: [RD Schaffer <R.D.Schaffer@cern.ch>, Antoine Perus <perus@lal.in2p3.fr>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasCORAL,
+            Database/IOVDbDataModel,
+            Database/AthenaPOOL/AthenaPoolCnvSvc,
+        ],
+        private: [
+            Control/AthenaKernel,
+            Database/AthenaPOOL/AthenaPoolUtilities,
+            External/AtlasReflex,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    IOVDbTPCnv: {
+        features: "atlas_tpcnv",
+        source:   ["src/*.cxx"],
+        use: ["CORAL", "IOVDbDataModel", "AthenaPoolCnvSvc"],
+    },
+    
+    IOVDbTPCnvDict: {
+        features: "atlas_dictionary",
+        source:   ["IOVDbTPCnv/IOVDbTPCnvDict.h"],
+        use: [#"CORAL", "IOVDbDataModel", "AthenaPoolCnvSvc", "AthenaKernel", "AthenaPoolUtilities",
+              "IOVDbTPCnv"],
+        selection_file: ["IOVDbTPCnv/selection.xml"],
+    },
+    
+    ARA_IOVDbTPCnvDict: {
+        features: "atlas_dictionary",
+        source:   ["IOVDbTPCnv/IOVDbTPCnvDict.h"],
+        use: [#"CORAL", "IOVDbDataModel", "AthenaPoolCnvSvc", "AthenaKernel", "AthenaPoolUtilities",
+              "IOVDbTPCnv"],
+        selection_file: ["IOVDbTPCnv/ARA_selection.xml"],
+    },
+    
+    OLD_IOVDbTPCnvDict: {
+        features: "atlas_dictionary",
+        source:   ["IOVDbTPCnv/IOVDbTPCnvDict.h"],
+        use: [#"CORAL", "IOVDbDataModel", "AthenaPoolCnvSvc", "AthenaKernel", "AthenaPoolUtilities",
+              "IOVDbTPCnv"],
+        selection_file: ["IOVDbTPCnv/OLD_selection.xml"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

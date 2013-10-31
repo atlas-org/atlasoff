@@ -1,0 +1,104 @@
+## package header
+package: {
+    name:    Control/AthenaExamples/AthExStoreGateExample,
+    authors: [Paolo Calafiura <Paolo.Calafiura@cern.ch>, David Quarrie <David.Quarrie@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/SGTools,
+        ],
+        private: [
+            Control/AthenaKernel,
+            Control/AthContainers,
+            Control/AthLinks,
+            Control/DataModel,
+            Control/AthenaBaseComps,
+            Event/EventInfo,
+            External/GaudiInterface,
+            Control/PileUpTools,
+            Control/StoreGate,
+            External/AtlasReflex,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    AthExStoreGateExample: {
+        features: "atlas_component",
+        source:   [
+            "src/*.cxx",
+            "src/components/*.cxx",
+            ],
+        use: ["SGTools", "AthenaKernel", "AthLinks",
+              "AthContainers",
+              "DataModel", "AthenaBaseComps", "EventInfo", "GaudiKernel",
+              "PileUpTools", "StoreGate",
+              ],
+    },
+    
+    AthExStoreGateExample-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    SGTutorialLib: {
+        features: "atlas_library",
+        source:   ["Tutorial/LinkObj.cxx", "Tutorial/SGRead.cxx", "Tutorial/SGWrite.cxx"],
+        use: ["AthenaBaseComps",
+              "AthenaKernel",
+              "StoreGate",
+              "DataModel",
+              "AthLinks",
+              "AthContainers",
+              ],
+    },
+    
+    SGTutorial: {
+        features: "atlas_component",
+        source:   [
+            "Tutorial/SGTutorial_entries.cxx",
+            "Tutorial/SGTutorial_load.cxx",
+            ],
+        use: ["SGTutorialLib", "GaudiKernel",],
+    },
+    
+    AthExDFlow: {
+        features: "atlas_component",
+        source:   [
+            "src_dflow/*.cxx",
+            "src_dflow/components/*.cxx",
+            ],
+        use: ["SGTools", "AthenaKernel", "AthLinks", "DataModel",
+              "AthenaBaseComps", "EventInfo", "GaudiKernel", "PileUpTools", "StoreGate",
+              ],
+    },
+    
+    AthExStoreGateExampleDict: {
+        features: "atlas_dictionary",
+        source:   ["AthExStoreGateExample/AthExStoreGateExampleDict.h"],
+        use: ["SGTutorialLib"],
+        selection_file: ["AthExStoreGateExample/selection.xml"],
+    },
+
+    ## FIXME: add static_athena_app !!
+}
+
+## EOF ##

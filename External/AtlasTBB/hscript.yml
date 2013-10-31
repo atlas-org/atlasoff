@@ -1,0 +1,40 @@
+## package header
+package: {
+    name:    External/AtlasTBB,
+    authors: [binet],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/ExternalPolicy,
+            LCG_Interfaces/tbb,
+            Tools/PyCmt,
+        ],
+        private: [],
+        runtime: [
+            Tools/PyCmt,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+}
+
+build: {
+    
+    test-tbb: {
+        features: "atlas_application",
+        source:   ["test-tbb.cxx"],
+        use:      ["tbb"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

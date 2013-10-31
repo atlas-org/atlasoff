@@ -1,0 +1,111 @@
+## package header
+package: {
+    name:    Control/AthenaExamples/AthExThinning,
+    authors: [Sebastien Binet <binet@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            Control/AthContainers,
+            Control/AthLinks,
+            Control/AthenaKernel,
+            Control/AthenaServices,
+            Control/SGTools,
+            Control/StoreGate,
+            Control/AthenaBaseComps,
+            Control/DataModel,
+            Control/AthenaPython,
+            External/AtlasCLHEP,
+            Control/DataModelAthenaPool,
+            Database/AthenaPOOL/AthenaPoolUtilities,
+            Database/AthenaPOOL/AthenaPoolCnvSvc,
+        ],
+        private: [
+            External/AtlasReflex,
+        ],
+        runtime: [
+            Control/AthenaServices,
+            Control/AthenaPython,
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    AthExThinning-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    AthExThinning-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    AthExThinningEvent: {
+        features: "atlas_library",
+        source:   [
+            "src_lib/AthExIParticle.cxx",
+            "src_lib/AthExIParticles.cxx",
+            "src_lib/AthExParticle.cxx",
+            "src_lib/AthExParticles.cxx",
+            "src_lib/AthExElephantino.cxx",
+            "src_lib/AthExDecay.cxx",
+            "src_lib/AthExFatObject.cxx",
+            "src_lib/AthExFatObjectSlimmer.cxx",
+            "src_lib/AthExElephantino_p1.cxx",
+            "src_lib/AthExDecay_p1.cxx",
+            "src_lib/AthExParticles_p1.cxx",
+            "src_lib/AthExFatObject_p1.cxx",
+            ],
+        use: ["GaudiKernel", "AthenaKernel", "AthenaServices", "SGTools",
+              "StoreGate",
+              "DataModel",
+              "AthContainers",
+              "AthLinks",
+              "AthenaPython",
+              "CLHEP", "AthenaPoolUtilities", "AthenaPoolCnvSvc",
+              "DataModelAthenaPool",
+              ],
+    },
+    
+    AthExThinningAlgs: {
+        features: "atlas_component",
+        source:   [
+            "src_lib/CreateData.cxx",
+            "src_lib/WriteThinnedData.cxx",
+            "src_lib/ReadThinnedData.cxx",
+            "src_lib/SlimmerAlg.cxx",
+            "src_lib/components/*.cxx",
+            ],
+        use: ["GaudiKernel", "AthenaKernel", "AthenaServices", "SGTools",
+              "StoreGate", "AthenaBaseComps",
+              "DataModel",
+              "AthContainers",
+              "AthLinks",
+              "AthenaPython",
+              "CLHEP", "DataModelAthenaPool", "AthenaPoolUtilities", "AthenaPoolCnvSvc",
+              ],
+    },
+    
+    AthExThinningEventDict: {
+        features: "atlas_dictionary",
+        source:   ["AthExThinning/AthExThinningEventDict.h"],
+        use: ["AthExThinningEvent"],
+        selection_file: ["AthExThinning/selection.xml"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

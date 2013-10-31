@@ -1,0 +1,59 @@
+## package header
+package: {
+    name:    Database/PersistentDataModelTPCnv,
+    authors: [Peter van Gemmeren <gemmeren@anl.gov>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Database/PersistentDataModel,
+        ],
+        private: [
+            External/AtlasReflex,
+            LCG_Interfaces/uuid,
+            Control/CxxUtils,
+        ],
+        runtime: [
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    PersistentDataModelTPCnv: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: [
+            "PersistentDataModel",
+            "uuid",
+            "CxxUtils",
+            ],
+    },
+    
+    PersistentDataModelTPCnvDict: {
+        features: "atlas_dictionary",
+        source:   ["PersistentDataModelTPCnv/PersistentDataModelTPCnvDict.h"],
+        use: ["PersistentDataModelTPCnv"],
+        selection_file: ["PersistentDataModelTPCnv/selection.xml"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

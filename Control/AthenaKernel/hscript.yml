@@ -1,0 +1,84 @@
+## package header
+package: {
+    name:    Control/AthenaKernel,
+    authors: ["Paolo Calafiura <pcalafiura@lbl.gov>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            LCG_Interfaces/uuid,
+            External/GaudiInterface,
+            External/AtlasReflex,
+            External/AtlasBoost,
+            External/AtlasReflex,
+            Control/CxxUtils,
+            Tools/Scripts,
+        ],
+        private: [
+            External/AtlasROOT,
+            AtlasTest/TestTools,
+        ],
+        runtime: [
+            Tools/Scripts,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+        GENCLIDDB: "genCLIDDB.exe",
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    AthenaKernel: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      ["GaudiKernel",
+                   "CxxUtils",
+                   "Reflex", "Cintex",
+                   "boost-filesystem",
+                   "boost-system",
+                   "boost-regex",
+                   "boost-thread",
+                   "uuid", "rt",
+                   ],
+    },
+
+    AthenaKernelDict: {
+        features: "atlas_dictionary",
+        source:   "AthenaKernel/AthenaKernelDict.h",
+        selection_file: "AthenaKernel/selection.xml",
+        use:      [
+            "AthenaKernel",
+            "GaudiKernel", "Reflex",
+            "boost-filesystem", "boost-system",
+            "boost-regex",
+            "boost-thread",
+            "uuid",
+            ],
+    },
+    
+    genCLIDDB: {
+        features: "atlas_application",
+        source:   ["utils/genCLIDDB.cxx"],
+        use: ["boost-program_options",
+              "AthenaKernel",
+              "TestTools",
+              ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

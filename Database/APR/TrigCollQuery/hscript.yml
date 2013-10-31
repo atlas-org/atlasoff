@@ -1,0 +1,62 @@
+## package header
+package: {
+    name:    Database/APR/TrigCollQuery,
+    authors: ["Marcin Nowak <Marcin.Nowak@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            Control/AthenaKernel,
+        ],
+        private: [
+            External/AtlasXercesC,
+            External/AtlasBoost,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+
+    TrigCollQuery: {
+        features: "atlas_dual_use_library",
+        source:   [
+            "src/TrigCollQuery.cxx",
+            "src/TrigCollQueryTool.cxx",
+            ],
+        use:      [
+            "GaudiKernel",
+            "AthenaKernel",
+            "boost-system", "boost-filesystem",
+            "XercesC",
+            ],
+    },
+
+    TrigCollQuery-install_jobos: {
+        features: "atlas_install_joboptions",
+    },
+    
+    runCollUtil: {
+        features: "atlas_application",
+        source:   ["src/runCollUtil.cxx"],
+        use:      ["TrigCollQuery",
+                   ],
+    },
+    
+    decodeTriggerQuery: {
+        features: "atlas_application",
+        source:   ["decodeTriggerQuery.cxx"],
+        use:      ["TrigCollQuery"],
+    },
+}
+
+## EOF ##

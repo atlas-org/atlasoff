@@ -1,0 +1,63 @@
+## package header
+package: {
+    name:    Database/PersistentDataModel,
+    authors: ["Peter Van Gemmeren <gemmeren@anl.gov>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            Control/SGTools,
+            Control/RootUtils,
+        ],
+        private: [
+            LCG_Interfaces/uuid,
+            External/AtlasReflex,
+        ],
+        runtime: [
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    PersistentDataModel: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      [
+            "GaudiKernel",
+            "SGTools",
+            "RootUtils",
+            "uuid",
+            ],
+    },
+
+    PersistendDataModelDict: {
+        features: "atlas_dictionary",
+        source:   ["PersistentDataModel/PersistentDataModelDict.h"],
+        selection_file: "PersistentDataModel/selection.xml",
+        use:      [
+            "PersistentDataModel",
+        ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

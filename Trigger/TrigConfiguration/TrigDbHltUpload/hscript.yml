@@ -1,0 +1,58 @@
+## package header
+package: {
+    name:    Trigger/TrigConfiguration/TrigDbHltUpload,
+    authors: [Joerg.Stelzer@cern.ch],
+    managers: [Joerg.Stelzer@cern.ch],
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            LCG_Interfaces/oracle,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    TrigDbHltUpload-generic-install-python_modules-python: {
+        features: "detcommon_generic_install",
+        source:   ["python/*.py"],
+        install_prefix: ["python/TrigDbHltUpload"],
+    },
+    
+    TrigDbHltUpload-generic-install-python_scripts-scripts: {
+        features: "detcommon_generic_install",
+        source:   ["share/C*.py",
+                   "share/prepareOnlineTriggerConfig.py",
+                   "share/oldPrepareOnlineTriggerConfig.py",
+                   "share/menumerge.py",
+                   "share/*.sh"],
+        install_prefix: ["share/bin"],
+    },
+    
+    TrigDbHltUpload-generic-install-XML-XML: {
+        features: "detcommon_generic_install",
+        source:   ["XML/*.dtd"],
+        install_prefix: ["XML/TrigDbHltUpload"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

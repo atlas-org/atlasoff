@@ -1,0 +1,47 @@
+## package header
+package: {
+    name:    Control/AthenaExamples/AthExRunExamples,
+    authors: ["David Quarrie <David.Quarrie@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/AthenaExamples/AthExFortranAlgorithm,
+            Control/AthenaExamples/AthExHelloWorld,
+            Control/AthenaExamples/AthExHistNtup,
+            Control/AthenaExamples/AthExStoreGateExample,
+            Control/AthenaExamples/ToyConversion,
+            Control/MinimalRunTime,
+        ],
+        private: [],
+        runtime: [
+            Control/AthenaExamples/AthExFortranAlgorithm,
+            Control/AthenaExamples/AthExHelloWorld,
+            Control/AthenaExamples/AthExHistNtup,
+            Control/AthenaExamples/AthExStoreGateExample,
+            Control/AthenaExamples/ToyConversion,
+            Control/MinimalRunTime,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+
+}
+
+## EOF ##

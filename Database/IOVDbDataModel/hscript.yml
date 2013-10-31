@@ -1,0 +1,61 @@
+## package header
+package: {
+    name:    Database/IOVDbDataModel,
+    authors: ["RD Schaffer <R.D.Schaffer@cern.ch>",
+              "Antoine Perus <perus@lal.in2p3.fr>",
+              ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            Control/CLIDSvc,
+            Control/SGTools,
+            Database/AthenaPOOL/AthenaPoolUtilities,
+            Control/AthenaKernel,
+        ],
+        private: [
+            External/AtlasReflex,
+            External/AtlasCORAL,
+            Control/RootUtils,
+        ],
+        runtime: [
+            External/AtlasReflex,
+        ],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    IOVDbDataModel: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: [
+            "GaudiKernel",
+            "CLIDSvc",
+            "SGTools",
+            "AthenaPoolUtilities",
+            "AthenaKernel",
+            "RootUtils",
+            "CORAL",
+        ],
+    },
+    
+    IOVDbDataModelDict: {
+        features: "atlas_dictionary",
+        source:   ["IOVDbDataModel/IOVDbDataModelDict.h"],
+        selection_file: "IOVDbDataModel/selection.xml",
+        use: ["IOVDbDataModel"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

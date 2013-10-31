@@ -1,0 +1,78 @@
+## package header
+package: {
+    name:    DetectorDescription/GeoModel/GeoModelSvc,
+    authors: [David Quarrie <David.Quarrie@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [
+            Control/StoreGate,
+            Control/SGTools,
+            Control/AthenaKernel,
+            Control/AthenaBaseComps,
+            Control/CLIDSvc,
+            External/GaudiInterface,
+            Event/EventInfo,
+            Event/EventInfoMgt,
+            DetectorDescription/GeoModel/GeoModelKernel,
+            Database/AthenaPOOL/RDBAccessSvc,
+            Database/APR/CollectionBase,
+            DetectorDescription/GeoModel/GeoModelInterfaces,
+            DetectorDescription/GeoModel/GeoModelUtilities,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    GeoModelSvc: {
+        features: "atlas_component",
+        source:   [
+            "src/GeoModelSvc.cxx",
+            "src/RDBMaterialManager.cxx",
+            "src/components/GeoModelSvc_entries.cxx",
+            "src/components/GeoModelSvc_load.cxx"],
+        use: [
+            StoreGate,
+            SGTools,
+            AthenaKernel,
+            AthenaBaseComps,
+            CLIDSvc,
+            GaudiKernel,
+            EventInfo,
+            EventInfoMgt,
+            GeoModelKernel,
+            RDBAccessSvc,
+            CollectionBase,
+            GeoModelInterfaces,
+            GeoModelUtilities,
+            ],
+    },
+    
+    GeoModelSvc-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

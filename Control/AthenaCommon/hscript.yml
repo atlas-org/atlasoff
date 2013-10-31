@@ -1,0 +1,69 @@
+## package header
+package: {
+    name:    Control/AthenaCommon,
+    authors: ["Paolo Calafiura <Paolo.Calafiura@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            External/AtlasTCMalloc,
+        ],
+        private: [
+            TestPolicy,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+        athena: "athena.py",
+        athena-app: "athena-app.py",
+    },
+}
+
+build: {
+    AthenaCommon-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   [
+            "share/athena.py",
+            "share/athena.C",
+            "share/athena-app.py",
+            "share/chappy.py",
+            "share/find_cfg_dups",
+            "test/*.py",
+            "share/test_cfg_pickling.py",
+            ],
+    },
+
+    AthenaCommon-install-jobos: {
+        features: "atlas_install_joboptions",
+        source: [
+            "share/Bootstrap.py",
+            "share/Preparation.py",
+            "share/Execution.py",
+            "share/Atlas.UnixStandardJob.py",
+            "share/Atlas_Gen.UnixStandardJob.py",
+            "share/MemTraceInclude.py",
+            "share/JobOptTraceInclude.py",
+            "share/runbatch.py",
+            ],
+    },
+
+    AthenaCommon-install-pymodules: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py", "python/Utils/*.py"],
+    },
+}
+
+## EOF ##

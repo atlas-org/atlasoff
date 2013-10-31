@@ -1,0 +1,168 @@
+## package header
+package: {
+    name:    Control/AthAllocators,
+    authors: ["scott snyder <snyder@bnl.gov>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            External/AtlasBoost,
+        ],
+        private: [
+            Control/CxxUtils,
+            AtlasTest/TestTools,
+            External/AtlasReflex,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    AthAllocators: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      ["CxxUtils"],
+    },
+
+    AthAllocatorsDict: {
+        features: "atlas_dictionary",
+        source:   "AthAllocators/AthAllocatorsDict.h",
+        selection_file: "AthAllocators/selection.xml",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaAllocatorBase: {
+        features: "atlas_unittest",
+        source:   "test/ArenaAllocatorBase_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaBlockAllocatorBase: {
+        features: "atlas_unittest",
+        source:   "test/ArenaBlockAllocatorBase_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaBlock: {
+        features: "atlas_unittest",
+        source:   "test/ArenaBlock_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaPoolAllocator: {
+        features: "atlas_unittest",
+        source:   "test/ArenaPoolAllocator_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaHeapAllocator: {
+        features: "atlas_unittest",
+        source:   "test/ArenaHeapAllocator_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaHandleBase: {
+        features: "atlas_unittest",
+        source:   "test/ArenaHandleBase_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaHandleBaseAllocT: {
+        features: "atlas_unittest",
+        source:   "test/ArenaHandleBaseAllocT_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaHandleBaseT: {
+        features: "atlas_unittest",
+        source:   "test/ArenaHandleBaseT_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaHeader: {
+        features: "atlas_unittest",
+        source:   "test/ArenaHeader_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaCachingHandle: {
+        features: "atlas_unittest",
+        source:   "test/ArenaCachingHandle_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaHandle: {
+        features: "atlas_unittest",
+        source:   "test/ArenaHandle_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaAllocatorCreator: {
+        features: "atlas_unittest",
+        source:   "test/ArenaAllocatorCreator_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaAllocatorRegistry: {
+        features: "atlas_unittest",
+        source:   "test/ArenaAllocatorRegistry_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-Arena: {
+        features: "atlas_unittest",
+        source:   "test/Arena_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaBase: {
+        features: "atlas_unittest",
+        source:   "test/ArenaBase_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaHeaderGaudiClear: {
+        features: "atlas_unittest",
+        source:   "test/ArenaHeaderGaudiClear_test.cxx",
+        use:      ["AthAllocators"],
+        extrapatterns: "^IncidentSvc +DEBUG Adding",
+    },
+
+    AthAllocators-ArenaPoolSTLAllocator: {
+        features: "atlas_unittest",
+        source:   "test/ArenaPoolSTLAllocator_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaHeapSTLAllocator: {
+        features: "atlas_unittest",
+        source:   "test/ArenaHeapSTLAllocator_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-ArenaSharedHeapSTLAllocator: {
+        features: "atlas_unittest",
+        source:   "test/ArenaSharedHeapSTLAllocator_test.cxx",
+        use:      ["AthAllocators"],
+    },
+
+    AthAllocators-DataPool: {
+        features: "atlas_unittest",
+        source:   "test/DataPool_test.cxx",
+        use:      ["AthAllocators"],
+        extrapatterns: "^IncidentSvc +DEBUG Adding|^HistogramPersis.* (INFO|DEBUG)|^JobOptionsSvc +INFO",
+    },    
+    
+    hwaf-call: [],
+}
+
+## EOF ##

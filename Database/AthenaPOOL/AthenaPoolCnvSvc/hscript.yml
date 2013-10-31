@@ -1,0 +1,85 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/AthenaPoolCnvSvc,
+    authors: ["Peter Van Gemmeren <gemmeren@bnl.gov>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasPOOL,
+            External/AtlasReflex,
+            External/GaudiInterface,
+            Control/AthenaBaseComps,
+            Control/DataModel,
+            Control/CLIDSvc,
+            Control/SGTools,
+            Database/PersistentDataModel,
+            Database/AthenaPOOL/AthenaPoolUtilities,
+            Database/AthenaPOOL/PoolSvc,
+            Database/TPTools,
+        ],
+        private: [
+            Control/AthenaKernel,
+            Control/StoreGate,
+            External/AtlasCORAL,
+            Database/APR/CollectionBase,
+            Database/APR/StorageSvc,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+
+    AthenaPoolCnvSvc: {
+        features: "atlas_library",
+        source:   "src/*.cxx",
+        use: [
+            "POOL",
+            "Reflex",
+            "GaudiKernel",
+            "AthenaBaseComps",
+            "DataModel",
+            "CLIDSvc",
+            "SGTools",
+            "PersistentDataModel",
+            "AthenaPoolUtilities",
+            "PoolSvc",
+            "TPTools",
+            "StoreGate",
+            "AthenaKernel",
+            "CORAL",
+            "CollectionBase",
+            "StorageSvc",
+        ],
+    },
+
+    AthenaPoolCnvSvcComps: {
+        features: "atlas_component",
+        source:   "src/components/*.cxx",
+        use: ["AthenaPoolCnvSvc"],
+    },
+
+    AthenaPoolCnvSvc-install-jobos: {
+        features: "atlas_install_joboptions",
+    },
+
+    AthenaPoolCnvSvc-install-pymodules: {
+        features: "atlas_install_python_modules",
+    },
+
+    AthenaPoolCnvSvc-install-data: {
+        features: "atlas_install_data",
+        source:   "share/*",
+    },
+}
+
+## EOF ##

@@ -1,0 +1,43 @@
+## package header
+package: {
+    name:    Tools/PathResolver,
+    authors: [],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+        ],
+        private: [
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+
+    PathResolver: {
+        features: "atlas_install_headers",
+    },
+    
+    PathResolver-test: {
+        features: "atlas_unittest",
+        source:   "test/PathResolver_test.cxx",
+        use:      ["PathResolver"],
+        env: {
+            DATAPATH: "test/A:test/B:test:${DATAPATH}",
+        },
+        ut_cwd:   ".",
+    },
+}
+
+## EOF ##

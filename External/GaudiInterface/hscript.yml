@@ -1,0 +1,29 @@
+## package header
+package: {
+    name:    External/GaudiInterface,
+    authors: ["Paolo Calafiura <Paolo.Calafiura@cern.ch>",
+              "David Quarrie <David.Quarrie@cern.ch>",
+              "RD Schaffer <R.D.Schaffer@cern.ch>",
+              ],
+
+
+    deps: {
+        public: [
+            External/ExternalPolicy,
+            GaudiKernel,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+}
+
+## EOF ##

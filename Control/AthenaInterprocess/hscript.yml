@@ -1,0 +1,40 @@
+## package header
+package: {
+    name:    Control/AthenaInterprocess,
+    authors: [],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/CLIDSvc,
+            Control/SGTools,
+            External/AtlasBoost,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    AthenaInterprocess: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: ["CLIDSvc",
+              "SGTools",
+              "boost-system", "boost-filesystem",
+              "rt", "pthread",
+              ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

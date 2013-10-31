@@ -1,0 +1,56 @@
+## package header
+package: {
+    name:    Control/AthenaExamples/AthExHelloWorld,
+    authors: [Paolo Calafiura <Paolo.Calafiura@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+        ],
+        private: [
+            Control/AthenaBaseComps,
+            TestPolicy,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    AthExHelloWorld: {
+        features: "atlas_component",
+        source:   ["src/*.cxx",
+                   "src/components/*.cxx"],
+        use: ["GaudiKernel", "AthenaBaseComps"],
+    },
+    
+    AthExHelloWorld-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    AthExHelloWorld-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

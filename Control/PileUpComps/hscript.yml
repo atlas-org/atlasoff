@@ -1,0 +1,45 @@
+## package header
+package: {
+    name:    Control/PileUpComps,
+    authors: [P. Calafiura <Paolo.Calafiura@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [
+            External/AtlasCLHEP,
+            External/AtlasBoost,
+            External/GaudiInterface,
+            Control/AthenaKernel,
+            Control/AthenaBaseComps,
+            Control/StoreGate,
+            Control/PileUpTools,
+            Event/EventInfo,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    PileUpComps: {
+        features: "atlas_component",
+        source:   ["src/*.cxx",
+                   "src/components/*.cxx"],
+        use: ["CLHEP", "boost-system", "boost-filesystem", "GaudiKernel", "AthenaKernel",
+              "AthenaBaseComps", "StoreGate", "PileUpTools", "EventInfo"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

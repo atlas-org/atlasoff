@@ -1,0 +1,59 @@
+## package header
+package: {
+    name:    Control/AthenaMPTools,
+    authors: [],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            External/AtlasBoost,
+        ],
+        private: [
+            Control/AthenaKernel,
+            Control/AthenaBaseComps,
+            Event/EventInfo,
+            Event/ByteStreamData,
+            Control/AthenaInterprocess,
+            External/yampl,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    AthenaMPTools: {
+        features: "atlas_component",
+        source:   ["src/*.cxx",
+                   "src/components/*.cxx"],
+        use: ["GaudiKernel",
+              "AthenaKernel",
+              "AthenaBaseComps",
+              "EventInfo",
+              "ByteStreamData",
+              "AthenaInterprocess",
+              "pthread",
+              "rt",
+              "boost-system", "boost-filesystem",
+              "yampl",
+              ],
+
+        cppflags: ["-fno-strict-aliasing"],
+    },
+
+    AthenaMPTools-install-headers: {
+        features: "atlas_install_headers",
+    },
+    
+}
+
+## EOF ##

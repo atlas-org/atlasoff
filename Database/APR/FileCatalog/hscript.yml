@@ -1,0 +1,186 @@
+## package header
+package: {
+    name:    Database/APR/FileCatalog,
+    authors: ["Marcin Nowak"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasCORAL,
+            Database/APR/POOLCore,
+        ],
+        private: [
+            External/AtlasReflex,
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    FileCatalog: {
+        features: "atlas_library",
+        source:   ["src/*.cpp"],
+        use:      [
+            "CORAL",
+            "POOLCore",
+            "Reflex",
+        ],
+    },
+
+    # --- tests ---
+    FCEntry: {
+        features: "atlas_unittest",
+        source:   ["test/FCEntry_test.cxx"],
+        use:      ["FileCatalog"],
+    },
+
+    # implWrapper requires mysql runtime
+    # FileCatalog-implWrapper: {
+    #     features: "atlas_unittest",
+    #     source:   ["test/implWrapper_test.cxx"],
+    #     use:      ["FileCatalog", "mysql"],
+    # },
+
+    FileCatalog-QueryParser: {
+        features: "atlas_unittest",
+        source:   ["test/QueryParser_test.cxx"],
+        use:      ["FileCatalog"],
+    },
+
+    FileCatalog-URIParser: {
+        features: "atlas_unittest",
+        source:   ["test/URIParser_test.cxx"],
+        use:      ["FileCatalog"],
+    },
+
+    # --- utilities ---
+    FCaddMetaData: {
+        features: "atlas_application",
+        source:   ["utilities/FCaddMetaData.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCaddReplica: {
+        features: "atlas_application",
+        source:   ["utilities/FCaddReplica.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCcreateMetaDataSpec: {
+        features: "atlas_application",
+        source:   ["utilities/FCcreateMetaDataSpec.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCdeleteEntry: {
+        features: "atlas_application",
+        source:   ["utilities/FCdeleteEntry.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCdeleteLFN: {
+        features: "atlas_application",
+        source:   ["utilities/FCdeleteLFN.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCdeleteMetaData: {
+        features: "atlas_application",
+        source:   ["utilities/FCdeleteMetaData.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCdeletePFN: {
+        features: "atlas_application",
+        source:   ["utilities/FCdeletePFN.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCdescribeMetaData: {
+        features: "atlas_application",
+        source:   ["utilities/FCdescribeMetaData.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCdropMetaData: {
+        features: "atlas_application",
+        source:   ["utilities/FCdropMetaData.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FClistGUID: {
+        features: "atlas_application",
+        source:   ["utilities/FClistGUID.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FClistLFN: {
+        features: "atlas_application",
+        source:   ["utilities/FClistLFN.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FClistMetaData: {
+        features: "atlas_application",
+        source:   ["utilities/FClistMetaData.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FClistPFN: {
+        features: "atlas_application",
+        source:   ["utilities/FClistPFN.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCpublish: {
+        features: "atlas_application",
+        source:   ["utilities/FCpublish.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCregisterLFN: {
+        features: "atlas_application",
+        source:   ["utilities/FCregisterLFN.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCregisterPFN: {
+        features: "atlas_application",
+        source:   ["utilities/FCregisterPFN.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCrenamePFN: {
+        features: "atlas_application",
+        source:   ["utilities/FCrenamePFN.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    FCupdateMetaDataSpec: {
+        features: "atlas_application",
+        source:   ["utilities/FCupdateMetaDataSpec.cpp"],
+        use:      ["FileCatalog"],
+    },
+    
+    
+    hwaf-call: [],
+}
+
+## EOF ##

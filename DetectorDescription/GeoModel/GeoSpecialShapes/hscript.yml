@@ -1,0 +1,59 @@
+## package header
+package: {
+    name:    DetectorDescription/GeoModel/GeoSpecialShapes,
+    authors: [Joe Boudreau,
+              Andrei Soukharev <andrei.soukharev@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasCLHEP,
+            DetectorDescription/GeoModel/GeoModelKernel,
+        ],
+        private: [
+            Control/CxxUtils,
+            External/GaudiInterface,
+            External/AtlasCORAL,
+            Database/AthenaPOOL/RDBAccessSvc,
+            DetectorDescription/GeoModel/GeoModelUtilities,
+            DetectorDescription/GeoModel/GeoModelInterfaces,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    GeoSpecialShapes: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use: ["CLHEP",
+              "CxxUtils",
+              "GaudiKernel",
+              "GeoModelKernel",
+              "GeoModelUtilities",
+              "GeoModelInterfaces",
+              "RDBAccessSvc",
+              "CORAL",
+              ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

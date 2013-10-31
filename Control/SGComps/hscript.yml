@@ -1,0 +1,57 @@
+## package header
+package: {
+    name:    Control/SGComps,
+    authors: [Paolo Calafiura <Paolo.Calafiura@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [
+            External/GaudiInterface,
+            External/AtlasBoost,
+            Control/AthenaKernel,
+            Control/AthenaBaseComps,
+            Control/SGTools,
+            Control/StoreGate,
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    SGComps: {
+        features: "atlas_component",
+        source:   ["src/*.cxx",
+                   "src/components/*.cxx"],
+        use: ["GaudiKernel", "boost-system", "boost-filesystem", "AthenaKernel", "AthenaBaseComps", "SGTools", "StoreGate"],
+    },
+    
+    SGComps-test-SGFolder: {
+        features: "atlas_unittest",
+        source:   ["test/SGFolder_test.cxx"],
+        use: ["GaudiKernel", "boost-system", "boost-filesystem", "AthenaKernel", "AthenaBaseComps", "SGTools", "StoreGate", "TestTools"],
+        extrapatterns: ["'^JobOptionsSvc +INFO"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

@@ -1,0 +1,65 @@
+## package header
+package: {
+    name:    Database/IOVDbMetaDataTools,
+    authors: [RD Schaffer <R.D.Schaffer@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+        ],
+        private: [
+            Control/AthenaBaseComps,
+            Control/StoreGate,
+            Database/AthenaPOOL/AthenaPoolKernel,
+            Database/IOVDbDataModel,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    IOVDbMetaDataTools-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    IOVDbMetaDataTools: {
+        features: "atlas_component",
+        source:   [
+            "src/IOVDbMetaDataTool.cxx",
+            "src/components/*.cxx",
+            ],
+        use: [
+            "GaudiKernel",
+            "AthenaBaseComps",
+            "StoreGate",
+            "AthenaPoolKernel",
+            "IOVDbDataModel",
+            ],
+    },
+
+    IOVDbMetaDataTools-install-headers: {
+        features: "atlas_install_headers",
+    },
+
+    hwaf-call: [],
+}
+
+## EOF ##

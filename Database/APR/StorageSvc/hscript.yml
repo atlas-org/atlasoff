@@ -1,0 +1,70 @@
+## package header
+package: {
+    name:    Database/APR/StorageSvc,
+    authors: ["Marcin Nowak"],
+
+
+    deps: {
+        public: [
+            LCG_Interfaces/uuid,
+            AtlasPolicy,
+            External/AtlasReflex,
+            External/AtlasCORAL,
+            Database/PersistentDataModel,
+            Control/CxxUtils,
+        ],
+        private: [
+            Database/APR/POOLCore,
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    StorageSvc: {
+        features: "atlas_library",
+        source:   ["src/*.cpp"],
+        use:      [
+            "CORAL",
+            "Reflex",
+            "PersistentDataModel",
+            "CxxUtils",
+            "POOLCore",
+        ],
+        cxxflags: ["-Wno-deprecated", "-std=c++0x"],
+    },
+
+    StorageSvcDict: {
+        features: "atlas_dictionary",
+        source:   "StorageSvc/dict.h",
+        selection_file: "StorageSvc/dict.xml",
+        use: ["StorageSvc"],
+    },
+
+    # --- tests ----
+    StorageSvc-DbBlob: {
+        features: "atlas_unittest",
+        source:   "test/StorageSvc_DbBlob_test.cxx",
+        use:      ["StorageSvc"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

@@ -1,0 +1,54 @@
+## package header
+package: {
+    name:    Control/PerformanceMonitoring/PerfMonGPerfTools,
+    authors: [Attila Krasznahorkay <Attila.Krasznahorkay@cern.ch>,
+              Elmar Ritsch <Elmar.Ritsch@cern.ch>,
+              ],
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+        ],
+        private: [
+            External/AtlasGPerfTools,
+            Control/AthenaBaseComps,
+            Control/AthenaKernel,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    PerfMonGPerfTools: {
+        features: "atlas_component",
+        source:   ["src/*.cxx", "src/components/*.cxx"],
+        use: ["GaudiKernel", "AtlasGPerfTools", "AthenaBaseComps", "AthenaKernel"],
+    },
+    
+    PerfMonGPerfTools-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    PerfMonGPerfTools-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   ["scripts/*"],
+    },
+    
+    PerfMonGPerfTools-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

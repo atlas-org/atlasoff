@@ -1,0 +1,78 @@
+## package header
+package: {
+    name:    Event/EventInfoMgt,
+    authors: [RD Schaffer <R.D.Schaffer@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            Control/AthenaKernel,
+        ],
+        private: [
+            External/AtlasCORAL,
+            Control/CLIDSvc,
+            Control/StoreGate,
+            Control/SGTools,
+            Event/EventInfo,
+            Database/AthenaPOOL/AthenaPoolUtilities,
+            Database/IOVDbMetaDataTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    EventInfoMgt: {
+        features: "atlas_component",
+        source:   [
+            "src/TagInfoMgr.cxx",
+            "src/EventInfoMgt_entries.cxx",
+            "src/EventInfoMgt_load.cxx",
+            ],
+        use: [
+            "GaudiKernel", "AthenaKernel", "StoreGate",
+            "SGTools",
+            "CLIDSvc",
+            "EventInfo", "AthenaPoolUtilities", "IOVDbMetaDataTools",
+            "CORAL",
+            ],
+    },
+
+    EventInfoMgt-install-headers: {
+        features: "atlas_install_headers",
+    },
+    
+    EventInfoMgt-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    EventInfoMgt-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    EventInfoMgt-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   ["scripts/*"],
+    },
+}
+
+## EOF ##

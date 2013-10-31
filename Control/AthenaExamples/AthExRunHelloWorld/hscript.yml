@@ -1,0 +1,39 @@
+## package header
+package: {
+    name:    Control/AthenaExamples/AthExRunHelloWorld,
+    authors: [Christian, Arnault, <arnault@lal.in2p3.fr>, David, Quarrie, <David.Quarrie@cern.ch>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/AthenaExamples/AthExHelloWorld,
+            Control/MinimalRunTime,
+        ],
+        private: [],
+        runtime: [
+            Control/AthenaExamples/AthExHelloWorld,
+            Control/MinimalRunTime,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+
+}
+
+## EOF ##

@@ -1,0 +1,85 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/RDBAccessSvc,
+    authors: ["atlas collaboration"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            External/AtlasCORAL,
+            External/AtlasBoost,
+        ],
+        private: [
+            Control/AthenaBaseComps,
+            Database/AthenaPOOL/PoolSvc,
+            Database/APR/CollectionBase,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+    apply-tags: [
+        NEEDS_CORAL_BASE,
+    ],
+}
+
+build: {
+
+    RDBAccessSvc: {
+        features: "atlas_component",
+        source:   [
+            "src/RDBAccessSvc.cxx",
+            "src/RDBRecordset.cxx",
+            "src/RDBRecord.cxx",
+            "src/RDBVersionAccessor.cxx",
+            "src/RDBQuery.cxx",
+            "src/SourceCompAlg.cxx",
+            "src/components/RDBAccessSvc_entries.cxx",
+            "src/components/RDBAccessSvc_load.cxx",
+            ],
+        use: [
+            "GaudiKernel",
+            "CORAL",
+            "boost-system", "boost-filesystem",
+            "AthenaBaseComps",
+            "PoolSvc",
+            "CollectionBase",
+            ],
+    },
+
+    geomdb2oracle: {
+        features: "atlas_application",
+        source:   "replicator/geomdb2oracle.cpp",
+        use: [
+            "CORAL",
+            "CORAL-Relational-Access",
+            "boost-thread",
+            ],
+    },
+    
+    geomdb2sqlite: {
+        features: "atlas_application",
+        source:   "replicator/geomdb2sqlite.cpp",
+        use: [
+            "CORAL",
+            "CORAL-Relational-Access",
+            "boost-thread",
+            ],
+    },
+    
+    RDBAccessSvc-install-jobos: {
+        features: "atlas_install_joboptions",
+    },
+
+    RDBAccessSvc-install-headers: {
+        features: "atlas_install_headers",
+    },
+}
+
+## EOF ##

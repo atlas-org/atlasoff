@@ -1,0 +1,36 @@
+## package header
+package: {
+    name:    Trigger/TrigMonitoring/TrigStatsFromCool,
+    authors: [Joerg.Stelzer@cern.ch, Gorm.Galster@cern.ch],
+    managers: [Joerg.Stelzer@cern.ch, Gorm.Galster@cern.ch],
+
+    deps: {
+        public: [
+            AtlasCommonPolicy,
+            DetCommonPolicy,
+            LCG_Interfaces/COOL,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    # FIXME: add cython stuff
+    tools: [],
+    env: {
+    },
+    alias: {
+
+    },
+}
+
+build: {
+
+}
+
+## EOF ##

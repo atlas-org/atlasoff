@@ -1,0 +1,153 @@
+## package header
+package: {
+    name:    Control/DataModelAthenaPool,
+    authors: [
+        scott snyder <snyder@bnl.gov>,
+        Marcin Nowak <Marcin.Nowak@cern.ch>,
+        RD Schaffer <R.D.Schaffer@cern.ch>,
+        ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            Control/AthenaKernel,
+            Control/AthContainers,
+            Control/AthLinks,
+            Control/Navigation,
+            Control/RootUtils,
+            Control/AthenaBaseComps,
+            Database/AthenaPOOL/RootConversions,
+            Database/AthenaPOOL/AthenaPoolCnvSvc,
+        ],
+        private: [
+            External/AtlasCLHEP,
+            External/AtlasROOT,
+            External/AtlasReflex,
+            Control/CLIDSvc,
+            Control/SGTools,
+            Database/AthenaPOOL/AthenaPoolUtilities,
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    DataModelAthenaPoolDictDict: {
+        features: "atlas_dictionary",
+        source:   ["DataModelAthenaPool/DataModelAthenaPoolDict.h"],
+        use: ["DataModelAthenaPool", "RootUtils", "RootConversions", "Navigation"],
+        selection_file: ["DataModelAthenaPool/selection.xml"],
+    },
+    
+    DataModelAthenaPool: {
+        features: "atlas_component",
+        source:   ["src/*.cxx", "src/components/*.cxx"],
+        use: [
+            "GaudiKernel",
+            "AthenaKernel",
+            "AthContainers",
+            "AthLinks",
+            "Navigation",
+            "RootUtils",
+            "AthenaBaseComps",
+            "RootConversions",
+            "AthenaPoolCnvSvc",
+            "CLHEP",
+            "ROOT",
+            "Reflex",
+            "CLIDSvc",
+            "SGTools",
+            "AthenaPoolUtilities",
+            ],
+    },
+
+    DataModelAthenaPoolPoolCnv: {
+        features: "atlas_poolcnv",
+        depends_on: "DataModelAthenaPool",
+        use: ["DataModelAthenaPool", "AthContainers"],
+        poolcnv_files: ["UserDataStore.py"],
+    },
+    
+    DataModelAthenaPool-install-headers: {
+        features: "atlas_install_headers",
+    },
+    
+    DataModelAthenaPool-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    DataModelAthenaPool-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    DataModelAthenaPool-test-DataLink_p2: {
+        features: "atlas_unittest",
+        source:   ["test/DataLink_p2_test.cxx"],
+        use: ["complib-DataModelAthenaPool"],
+    },
+    
+    DataModelAthenaPool-test-ElementLinkCnv_p1: {
+        features: "atlas_unittest",
+        source:   ["test/ElementLinkCnv_p1_test.cxx"],
+        use: ["complib-DataModelAthenaPool"],
+    },
+    
+    DataModelAthenaPool-test-ElementLinkCnv_p2: {
+        features: "atlas_unittest",
+        source:   ["test/ElementLinkCnv_p2_test.cxx"],
+        use: ["complib-DataModelAthenaPool"],
+    },
+    
+    DataModelAthenaPool-test-ElementLinkCnv_p3: {
+        features: "atlas_unittest",
+        source:   ["test/ElementLinkCnv_p3_test.cxx"],
+        use: ["complib-DataModelAthenaPool"],
+    },
+    
+    DataModelAthenaPool-test-NavigableCnv_p1: {
+        features: "atlas_unittest",
+        source:   ["test/NavigableCnv_p1_test.cxx"],
+        use: ["complib-DataModelAthenaPool"],
+    },
+    
+    DataModelAthenaPool-test-NavigableCnv_p2: {
+        features: "atlas_unittest",
+        source:   ["test/NavigableCnv_p2_test.cxx"],
+        use: ["complib-DataModelAthenaPool"],
+    },
+    
+    DataModelAthenaPool-test-NavigableVectorCnv_p1: {
+        features: "atlas_unittest",
+        source:   ["test/NavigableVectorCnv_p1_test.cxx"],
+        use: ["complib-DataModelAthenaPool"],
+    },
+    
+    DataModelAthenaPool-test-NavigableVectorCnv_p2: {
+        features: "atlas_unittest",
+        source:   ["test/NavigableVectorCnv_p2_test.cxx"],
+        use: ["complib-DataModelAthenaPool"],
+    },
+    
+    DataModelAthenaPool-test-ElementLinkVectorCnv_p1: {
+        features: "atlas_unittest",
+        source:   ["test/ElementLinkVectorCnv_p1_test.cxx"],
+        use: ["complib-DataModelAthenaPool"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

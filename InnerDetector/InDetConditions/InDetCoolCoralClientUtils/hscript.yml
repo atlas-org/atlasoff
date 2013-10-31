@@ -1,0 +1,51 @@
+## package header
+package: {
+    name:    InnerDetector/InDetConditions/InDetCoolCoralClientUtils,
+    authors: ["B.DiGirolamo",
+              "D.Whittington",
+              ],
+
+
+    deps: {
+        public: [
+            DetCommonPolicy,
+            LCG_Interfaces/CORAL,
+            LCG_Interfaces/COOL,
+            LCG_Interfaces/Boost,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+        
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    InDetCoolCoralClientUtils: {
+        features: "atlas_library",
+        source:   "src/*.cpp",
+        use: [
+            "CORAL",
+            "COOL",
+            "boost-system", "boost-filesystem",
+        ],
+    },
+
+    InDetCoolCoralClientUtils-install-headers: {
+        features: "detcommon_install_headers",
+    },
+}
+
+## EOF ##

@@ -1,0 +1,36 @@
+## package header
+package: {
+    name:    Control/PerformanceMonitoring/PerfMonKernel,
+    authors: ["Sebastien Binet <binet@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            External/AtlasBoost,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    PerfMonKernel: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:      ["GaudiKernel",
+                   "AtlasBoost", "boost-array"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

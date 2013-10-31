@@ -1,0 +1,39 @@
+## package header
+package: {
+    name:    DetectorDescription/IdDictDetDescr,
+    authors: ["RD Schaffer <R.D.Schaffer@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            DetectorDescription/IdDict,
+            Control/SGTools,
+        ],
+        private: [
+            DetectorDescription/Identifier,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    
+    IdDictDetDescr: {
+        features: "atlas_library",
+        source:   ["src/IdDictManager.cxx"],
+        use:      ["IdDict",
+                   "Identifier",
+                   "SGTools"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

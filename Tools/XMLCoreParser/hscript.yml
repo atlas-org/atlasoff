@@ -1,0 +1,81 @@
+## package header
+package: {
+    name:    Tools/XMLCoreParser,
+    authors: ["Christian Arnault <arnault@lal.in2p3.fr>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [
+            External/AtlasExpat,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+
+    XMLCoreParser: {
+        features: "atlas_library",
+        source:   ["src/XMLCoreParser.cxx",
+                   "src/DOMNode.cxx",
+                   "src/ExpatCoreParser.cxx",
+                   ],
+        use:      ["Expat"],
+    },
+
+    texpat: {
+        features: "atlas_application",
+        source:   ["src/texpat.cxx",
+                   "src/DOMNode.cxx",
+                   "src/ExpatCoreParser.cxx",
+                   ],
+        use:      ["XMLCoreParser"],
+    },
+
+    XMLCoreParser-example1: {
+        features: "atlas_unittest",
+        source:   "doc/example1.cxx",
+        use:      ["XMLCoreParser"],
+        ut_args:  ["ATLAS_AGDD.xml"],
+    },
+    
+    XMLCoreParser-example2: {
+        features: "atlas_unittest",
+        source:   "doc/example2.cxx",
+        use:      ["XMLCoreParser"],
+        ut_args:  ["ATLAS_AGDD.xml"],
+    },
+    
+    # XMLCoreParser-example3: {
+    #     features: "atlas_unittest",
+    #     source:   "doc/example3.cxx",
+    #     use:      ["XMLCoreParser"],
+    #     ut_args:  ["ATLAS_AGDD.xml"],
+    # },
+    
+    XMLCoreParser-example4: {
+        features: "atlas_unittest",
+        source:   "doc/example4.cxx",
+        use:      ["XMLCoreParser"],
+    },
+    
+}
+
+## EOF ##

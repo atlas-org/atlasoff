@@ -1,0 +1,37 @@
+## package header
+package: {
+    name:    Tools/PyCmt,
+    authors: ["Atlas Collaboration"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasPython,
+        ],
+        private: [
+        ],
+        runtime: [
+            External/AtlasPython,
+        ],
+    }
+}
+
+options: {
+}
+
+configure: {
+}
+
+build: {
+    PyCmt-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   "bin/make_pkgbuild.py",
+    },
+
+    PyCmt-install-py: {
+        features: "atlas_install_python_modules",
+    },
+}
+
+## EOF ##

@@ -1,0 +1,61 @@
+## package header
+package: {
+    name:    Event/EventTPCnv,
+    authors: [RD Schaffer <R.D.Schaffer@cern.ch>, Kyle Cranmer <cranmer@cern.ch>, Marcin.Nowak@cern.ch],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/AtlasReflex,
+            Event/EventInfo,
+            Event/ByteStreamData,
+            Database/AthenaPOOL/AthenaPoolCnvSvc,
+        ],
+        private: [
+            Control/AthenaKernel,
+            AtlasTest/TestTools,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    EventTPCnv: {
+        features: "atlas_tpcnv",
+        source:   ["src/*.cxx"],
+        use: ["Reflex", "EventInfo", "ByteStreamData", "AthenaPoolCnvSvc", "AthenaKernel"],
+    },
+    
+    EventTPCnvDict: {
+        features: "atlas_dictionary",
+        source:   ["EventTPCnv/EventTPCnvDict.h"],
+        use: ["EventTPCnv"],
+        selection_file: ["EventTPCnv/selection.xml"],
+    },
+    
+    OLD_EventTPCnvDict: {
+        features: "atlas_dictionary",
+        source:   ["EventTPCnv/EventTPCnvDict.h"],
+        use: ["EventTPCnv"],
+        selection_file: ["EventTPCnv/OLD_selection.xml"],
+    },
+    
+    EventTPCnv-test-vectorize: {
+        features: "atlas_unittest",
+        source:   ["test/vectorize_test.cxx"],
+        use: ["EventTPCnv", "ers"],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

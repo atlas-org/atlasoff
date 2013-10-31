@@ -1,0 +1,62 @@
+## package header
+package: {
+    name:    Control/PileUpTools,
+    authors: [
+        "P. Calafiura <Paolo.Calafiura@cern.ch>",
+        "M. Marino <Massimo_Marino@lbl.gov>",
+        ],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            Control/AthLinks,
+            Control/AthenaKernel,
+            Control/AthenaBaseComps,
+            Control/CLIDSvc,
+            Control/DataModel,
+            Control/SGTools,
+            Control/StoreGate,
+            Event/EventInfo,
+            External/GaudiInterface,
+        ],
+        private: [],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+    tools: [],
+    env: {
+
+    },
+    alias: {
+
+    },
+}
+
+build: {
+    
+    PileUpTools: {
+        features: "atlas_dual_use_library",
+        source:   ["src/*.cxx"],
+        use: ["AthenaKernel",
+              "AthenaBaseComps",
+              "CLIDSvc",
+              "DataModel",
+              "AthLinks",
+              "SGTools",
+              "StoreGate",
+              "EventInfo",
+              "GaudiKernel",
+              ],
+    },
+    
+    hwaf-call: [],
+}
+
+## EOF ##

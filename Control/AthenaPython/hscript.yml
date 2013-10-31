@@ -1,0 +1,103 @@
+## package header
+package: {
+    name:    Control/AthenaPython,
+    authors: ["Sebastien Binet <binet@cern.ch>"],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+            External/GaudiInterface,
+            External/AtlasPyROOT,
+            External/AtlasROOT,
+            Control/AthenaKernel,
+            Control/StoreGate,
+            Control/AthenaBaseComps,
+        ],
+        private: [
+            Control/CxxUtils,
+            Control/SGTools,
+            External/AtlasPython,
+            External/AtlasReflex,
+            External/AtlasROOT,
+        ],
+        runtime: [
+            External/AtlasROOT,
+            Control/StoreGate,
+        ],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+
+    AthenaPython: {
+        features: "atlas_library",
+        source:   ["src/*.cxx"],
+        use:  ["GaudiKernel",
+               "PyROOT",
+               "ROOT",
+               "AthenaKernel",
+               "StoreGate",
+               "AthenaBaseComps",
+               "CxxUtils",
+               "SGTools",
+               "python",
+               ],
+    },
+    
+    AthenaPython-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt", "tests/*.py"],
+    },
+    
+    AthenaPython-install-py: {
+        features: "atlas_install_python_modules",
+        source:   ["python/*.py"],
+    },
+    
+    AthenaPythonComps: {
+        features: "atlas_component",
+        source:    ["src/components/*.cxx"],
+        use: [
+            "GaudiKernel",
+            "PyROOT",
+            "ROOT",
+            "AthenaKernel",
+            "StoreGate",
+            "AthenaBaseComps",
+            "CxxUtils",
+            "SGTools",
+            "python",
+            "AthenaPython",
+            ],
+    },
+    
+    AthenaPythonDict: {
+        features: "atlas_dictionary",
+        source:    ["AthenaPython/AthenaPythonDict.h"],
+        use:  [
+            "GaudiKernel",
+            "PyROOT",
+            "AthenaKernel",
+            "StoreGate",
+            "AthenaBaseComps",
+            "CxxUtils",
+            "SGTools",
+            "python",
+            "Reflex",
+            "ROOT",
+            "AthenaPython",
+            ],
+        selection_file: ["AthenaPython/selection.xml"],
+    },
+   
+}
+
+## EOF ##

@@ -1,0 +1,56 @@
+## package header
+package: {
+    name:    Database/AthenaPOOL/AthenaPoolTools,
+    authors: [RD Schaffer <R.D.Schaffer@cern.ch>, Jack Cranshaw <cranshaw@anl.gov>],
+
+
+    deps: {
+        public: [
+            AtlasPolicy,
+        ],
+        private: [
+            Control/StoreGate,
+            Control/AthenaKernel,
+            Database/PersistentDataModel,
+            Event/EventInfo,
+            External/GaudiInterface,
+            TestPolicy,
+        ],
+        runtime: [],
+    }
+}
+
+options: {
+    tools: [],
+}
+
+configure: {
+}
+
+build: {
+    
+    AthenaPoolTools: {
+        features: "atlas_component",
+        source:   ["src/EventCount.cxx", "src/RequireUniqueEvent.cxx", "src/components/*.cxx"],
+        use:      [
+            "GaudiKernel",
+            "AthenaKernel",
+            "PersistentDataModel",
+            "EventInfo",
+            "StoreGate",
+        ],
+    },
+    
+    AthenaPoolTools-install-jobos: {
+        features: "atlas_install_joboptions",
+        source:   ["share/*.py", "share/*.txt"],
+    },
+    
+    AthenaPoolTools-install-scripts: {
+        features: "atlas_install_scripts",
+        source:   ["share/PoolMove"],
+    },
+    
+}
+
+## EOF ##
