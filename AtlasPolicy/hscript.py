@@ -18,8 +18,8 @@ def pkg_deps(ctx):
     ctx.use_pkg("AtlasCxxPolicy", version="AtlasCxxPolicy-*", public=True)
     ctx.use_pkg("AtlasCommonPolicy", version="AtlasCommonPolicy-*", public=True)
     ctx.use_pkg("GaudiPolicy", version="v*", public=True)
-    ctx.use_pkg("Tools/CodeCheck", version="CodeCheck-*", public=True)
-    ctx.use_pkg("Tools/AtlasDoxygen", version="AtlasDoxygen-*", public=True)
+    #ctx.use_pkg("Tools/CodeCheck", version="CodeCheck-*", public=True)
+    #ctx.use_pkg("Tools/AtlasDoxygen", version="AtlasDoxygen-*", public=True)
     
     ## no private dependencies
     ## no runtime dependencies
